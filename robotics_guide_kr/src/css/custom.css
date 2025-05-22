@@ -1,0 +1,186 @@
+/**
+ * Any CSS customisations here are applied after the theme CSS, so they
+ * take precedence.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #25c2a0; /* A modern teal/green as primary */
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* Custom variables */
+  --ifm-font-family-base: 'Noto Sans KR', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --ifm-font-family-monospace: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; /* Keep monospaced as is or choose a preferred one */
+  --ifm-global-radius: 0.4rem; /* Slightly more rounded corners for a modern feel */
+
+  /* Custom Colors for a more distinct look - can be expanded */
+  --ifm-color-secondary: #5D6D7E; /* A cool gray for secondary elements */
+  --ifm-background-color: #ffffff; /* Clean white background */
+  --ifm-font-color-base: #333333; /* Darker base font for readability */
+
+  --ifm-hero-background-color: #f8f9fa; /* Light gray for hero banner */
+  --ifm-hero-text-color: var(--ifm-font-color-base);
+}
+
+/* For readability in dark mode */
+[data-theme='dark'] {
+  --ifm-color-primary: #25c2a0; /* Teal should work well in dark mode too */
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  
+  --ifm-background-color: #1e1e1e; /* Dark background for dark mode */
+  --ifm-font-color-base: #e0e0e0; /* Lighter font for dark mode */
+  --ifm-hero-background-color: #2a2a2a; /* Darker hero for dark mode */
+  --ifm-hero-text-color: var(--ifm-font-color-base);
+  --ifm-color-secondary: #aeb6bf; /* Lighter cool gray for dark mode */
+}
+
+/* General body and heading styles */
+body {
+  font-family: var(--ifm-font-family-base);
+  color: var(--ifm-font-color-base);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ifm-font-family-base); /* Ensure headings also use Noto Sans KR */
+  font-weight: 700; /* Bolder headings */
+}
+
+/* Improve link visibility and interaction */
+a {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+a:hover {
+  color: var(--ifm-color-primary-dark);
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+/* Button styling adjustments for a more modern feel */
+.button {
+  border-radius: var(--ifm-global-radius);
+  font-weight: 600;
+  transition: background-color 0.2s ease-out, transform 0.1s ease-out;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button--primary {
+  background-color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+}
+
+.button--primary:hover {
+  background-color: var(--ifm-color-primary-dark);
+  border-color: var(--ifm-color-primary-dark);
+}
+
+/* Hero banner specific styling */
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ifm-hero-background-color); /* Use variable */
+  color: var(--ifm-hero-text-color); /* Use variable */
+}
+
+.hero__title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero__subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  color: var(--ifm-color-secondary-darkest); /* Slightly muted for subtitle */
+}
+
+[data-theme='dark'] .hero__subtitle {
+  color: var(--ifm-color-secondary);
+}
+
+
+/* Styles for homepage sections (can be reused) */
+.section {
+  padding: 3rem 0;
+}
+
+.section:nth-child(even) {
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+/* Styles for the feature cards on the homepage index.js if needed */
+.featureCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; /* Center text within the card */
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  /* Optional: add border/shadow for card-like appearance */
+  /* border: 1px solid var(--ifm-color-emphasis-300); */
+  /* border-radius: var(--ifm-global-radius); */
+  /* box-shadow: var(--ifm-global-shadow-lw); */
+}
+
+.featureCard h3 {
+  margin-top: 0.5rem; /* Add some space if an SVG/icon is above */
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+}
+
+.featureCard p {
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  /* color: var(--ifm-color-secondary-darkest); */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 996px) {
+  .hero__title {
+    font-size: 2.5rem;
+  }
+  .hero__subtitle {
+    font-size: 1.1rem;
+  }
+  .featureCard h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero__title {
+    font-size: 2rem;
+  }
+  .hero__subtitle {
+    font-size: 1rem;
+  }
+  .featureCard {
+    margin-bottom: 2rem; /* More space between cards on mobile */
+  }
+}
+
+/* Ensure Noto Sans KR is loaded (if not using a plugin or other method) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
