@@ -1,0 +1,49 @@
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.featureSvg {
+  height: 200px;
+  width: 200px;
+}
+
+/* Additional styling for feature cards on the homepage index.js if needed */
+.featureCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  /* border: 1px solid var(--ifm-color-emphasis-300); */
+  /* border-radius: var(--ifm-global-radius); */
+  /* box-shadow: var(--ifm-global-shadow-lw); */
+  /* transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; */
+}
+
+/* .featureCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ifm-global-shadow-md);
+} */
+
+.featureCard h3 {
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem; /* Slightly larger font for feature titles */
+}
+
+.featureCard p {
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  color: var(--ifm-color-secondary-darkest);
+}
+
+/* Styles for the section directly in index.js */
+.section {
+  padding: 4rem 0;
+}
+
+.section:nth-child(even) {
+  background-color: var(--ifm-color-emphasis-100);
+}
