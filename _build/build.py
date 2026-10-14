@@ -134,6 +134,17 @@ def zoomfig(src, w, h, alt, cap=''):
             f'<p class="zoom-hint">{T("Click to enlarge", "눌러서 크게 보기")}</p>{c}</figure>')
 
 
+
+def sweep_pair(v, preload='metadata'):
+    real = T('Real robot', '실물')
+    sim = T('Isaac Lab', 'Isaac Lab')
+    return (f'<div class="pair-wide media"><video class="autoplay" src="{v}sweep_pair.mp4" poster="{v}sweep_pair.jpg" muted loop playsinline preload="{preload}" aria-label="Sweeping, real robot and Isaac Lab side by side"></video>'
+            f'<div class="tags"><span class="tag tag-real">{real}</span><span class="tag">2.3×</span></div>'
+            f'<div class="tags half-r"><span class="tag tag-sim">{sim}</span><span class="tag">1×</span></div></div>'
+            f'<div class="pair-tall media"><video class="autoplay" src="{v}sweep_pair_v.mp4" poster="{v}sweep_pair_v.jpg" muted loop playsinline preload="none" aria-label="Sweeping, real robot and Isaac Lab"></video>'
+            f'<div class="tags"><span class="tag tag-real">{real}</span><span class="tag">2.3×</span></div>'
+            f'<div class="tags half-b"><span class="tag tag-sim">{sim}</span><span class="tag">1×</span></div></div>')
+
 def bars(title, meta, groups, xlabels, aria, cls=''):
     gl = ''.join(f'<i class="{"zero" if y == 0 else ""}" style="bottom:{y}%"><b>{y}</b></i>' for y in (100, 75, 50, 25, 0))
     cols = ''
@@ -290,17 +301,18 @@ def build_home():
 </a>'''
 
     assets = f'''
-<a class="wcard wcard-wide" href="work/sim-assets.html">
-  <div class="wcard-media">
-    {image(im + 'a_real_sweep.webp', 'Real sweeping setup', tags(('Real', 'real'),), 'r169')}
-    {video(v + 'sim_sweep.mp4', v + 'sim_sweep.jpg', 'Isaac Lab sweeping scene', tags(('Isaac Lab', 'sim'),))}
-  </div>
+<a class="wcard wcard-stack" href="work/sim-assets.html">
+  <div class="wcard-media">{sweep_pair(v)}</div>
   <div class="wcard-body">
-    <p class="label"><span class="num-tag">04</span><span class="sep">/</span>Simulation assets<span class="sep">/</span>2025 ~ 2026</p>
-    <h3>{T('Real tools, rebuilt for Isaac Lab', '실물 도구를 Isaac Lab으로')}<small>{T('Broom, dustpan, broom supporter, cans, photogrammetry', '빗자루, 쓰레받기, 서포터, 캔, Photogrammetry')}</small></h3>
-    <p class="wdesc">{T('Broom and supporter modeled in CAD, a dustpan resized to the lab one, cans with real label textures. Appearance from photos, collision from separate colliders.', '빗자루와 서포터는 CAD로 직접 모델링, 쓰레받기는 실험실 크기로, 캔은 실물 라벨 텍스처. 겉모습은 실물 사진 기준, 충돌은 별도 Collider')}</p>
-    <div class="chips"><span class="chip">Fusion</span><span class="chip">Blender</span><span class="chip">USD</span><span class="chip">Meshroom</span><span class="chip">Isaac Lab</span></div>
-    <span class="wmore">{T('Read the case study', '자세히 보기')} {ARROW}</span>
+    <div>
+      <p class="label"><span class="num-tag">04</span><span class="sep">/</span>Simulation assets<span class="sep">/</span>2025 ~ 2026</p>
+      <h3>{T('Real tools, rebuilt for Isaac Lab', '실물 도구를 Isaac Lab으로')}<small>{T('Broom, dustpan, broom supporter, cans, photogrammetry', '빗자루, 쓰레받기, 서포터, 캔, Photogrammetry')}</small></h3>
+    </div>
+    <div>
+      <p class="wdesc">{T('The real robot and Isaac Lab from the same camera view, lined up step by step. Both pick the broom off the supporter, sweep the trash into the pan and lean the broom back on the supporter.', '실물과 같은 카메라 시점의 Isaac Lab을 단계별로 맞춰 재생. 둘 다 서포터에 기댄 빗자루를 집어 쓰레기를 쓰레받기에 쓸어 넣고, 빗자루를 다시 서포터에 걸쳐 놓음')}</p>
+      <div class="chips"><span class="chip">Fusion</span><span class="chip">Blender</span><span class="chip">USD</span><span class="chip">Meshroom</span><span class="chip">Isaac Lab</span></div>
+      <span class="wmore">{T('Read the case study', '자세히 보기')} {ARROW}</span>
+    </div>
   </div>
 </a>'''
 
@@ -735,11 +747,8 @@ def build_assets():
         (('Tools', '도구'), ('Fusion, Blender, MeshLab, Meshroom, USD, Isaac Lab', 'Fusion, Blender, MeshLab, Meshroom, USD, Isaac Lab')),
         (('Assets', '자산'), ('Broom, broom supporter (own CAD), dustpan, cans', '빗자루, 서포터(직접 CAD), 쓰레받기, 캔')),
     ])
-    hero = f'''<div class="cs-dark"><div class="cs-hero-grid">
-  {image(im + 'a_real_sweep.webp', 'Real sweeping setup', tags(('Real', 'real'),), 'r169')}
-  {image(im + 'a_sim_sweep.webp', 'The same setup in Isaac Lab', tags(('Isaac Lab', 'sim'),), 'r169')}
-</div></div>
-<p class="cap-text">{T('The sweeping setup on the real robot (left) and in Isaac Lab (right).', '실물(왼쪽)과 Isaac Lab(오른쪽)의 쓸기 장면')}</p>'''
+    hero = f'''<div class="cs-dark">{sweep_pair(v, 'auto')}</div>
+<p class="cap-text">{T('The real robot and Isaac Lab, rendered from the camera pose solved from the real video. The real video plays at about 2.3× so each step lines up.', '실물과, 실물 영상에서 구한 카메라 자세로 렌더링한 Isaac Lab. 단계가 맞도록 실물 영상은 약 2.3배속')}</p>'''
 
     assets = [('a_pair_broom', ('Broom', '빗자루'), 'own CAD', ('Modeled in Fusion (2025.11). Three convex hulls; the bristles are approximated as a rigid body. Bristle-table and bristle-dustpan collisions are excluded.', 'Fusion으로 직접 CAD 모델링(2025.11). Convex hull 3개, 솔은 Rigid body로 근사. 솔과 책상, 쓰레받기 충돌 제외')),
               ('a_pair_dustpan', ('Dustpan', '쓰레받기'), 'public mesh', ('Public mesh edited in Blender and set up as USD, resized to the lab dustpan (21 cm wide), with a convex decomposition collider.', '공개 Mesh를 Blender에서 편집해 USD로 구성. 실험실 쓰레받기 크기(폭 21 cm)로 다시 맞추고 Convex decomposition Collider 적용')),
@@ -754,8 +763,11 @@ def build_assets():
   <figure class="ccard"><div class="media r169" style="background:#000"><img src="{im}a_col_broom.webp" alt="Broom collider" loading="lazy" style="object-fit:contain">{tags(('Collider', ''),)}</div><div class="ccard-body"><h3>{T('Broom', '빗자루')}</h3><p class="prose">{T('Three convex hulls; the bristles are one rigid body.', 'Convex hull 3개, 솔은 하나의 Rigid body')}</p></div></figure>
 </div>'''
 
-    s3 = f'''<div class="vgrid" style="grid-template-columns:1fr">{video(v + 'sim_sweep.mp4', v + 'sim_sweep.jpg', 'Isaac Lab sweeping scene', tags(('Isaac Lab', 'sim'), ('Scripted demo', '')), '', 'r169', 'metadata')}</div>
-<p class="cap-text">{T('The sweeping scene in Isaac Lab with the lab-size dustpan, run by a scripted demonstration.', '실험실 크기 쓰레받기를 넣은 Isaac Lab 쓸기 장면, Scripted demonstration으로 실행')}</p>'''
+    steps = [('Pick up the broom', '빗자루 집기'), ('Sweep into the pan', '쓰레받기에 쓸어 넣기'), ('Lean it back on the supporter', '서포터에 다시 걸치기'), ('Arms home', '팔 복귀')]
+    cols = ''.join(f'<div class="step-col"><p class="label"><span class="num-tag">{k}</span> {T(*st)}</p><figure><img src="{im}sw_real_{k}.webp" alt="real" loading="lazy">{tags(("Real", "real"),)}</figure><figure><img src="{im}sw_sim_{k}.webp" alt="Isaac Lab" loading="lazy">{tags(("Isaac Lab", "sim"),)}</figure></div>' for k, st in enumerate(steps, 1))
+    s3 = f'''<p>{T('The same four moments from the two videos above. The broom starts leaning on the supporter and ends leaning on it again.', '위 두 영상의 같은 네 순간. 빗자루는 서포터에 기댄 채 시작해 다시 서포터에 걸쳐진 채 끝남')}</p>
+<div class="block steps4">{cols}</div>
+<p class="cap-text">{T('The simulation clip is a TMAD vision student recorded on 2026.10.03, before the dustpan was resized to the lab one.', 'Isaac Lab 영상은 2026.10.03에 녹화한 TMAD 영상 Student, 쓰레받기를 실험실 크기로 줄이기 전 장면')}</p>'''
 
     s4 = f'''<p>{T('For another lab project, I photographed real objects, reconstructed them with Meshroom, cleaned them up in MeshLab and Blender, and converted them to OBJ and USD for pose estimation and simulation.', '연구실의 다른 과제에서 자세 추정과 Simulation에 쓸 실물 물체 Mesh가 필요해 직접 촬영 후 Meshroom으로 복원하고, MeshLab과 Blender로 정리해 OBJ와 USD로 변환')}</p>
 <div class="chain"><span>photos</span><i></i><span>Meshroom SfM</span><i></i><span>MeshLab cleanup</span><i></i><span>Blender, OBJ</span><i></i><span>USD</span></div>
@@ -767,8 +779,8 @@ def build_assets():
 <div class="block"><div class="figframe"><img src="{im}a_meshroom.webp" alt="Meshroom reconstruction from 57 photos" loading="lazy"></div><p class="cap-text">{T('Meshroom, 57 photos of a sauce bottle. Lab project, 2025.09 to 10.', 'Meshroom, 소스 병 사진 57장. 연구실 과제, 2025.09 ~ 10')}</p></div>'''
 
     sections = [sec('assets', '01', 'Four assets', '네 가지 자산', s1), sec('collision', '02', 'Visual mesh and collider', 'Visual mesh와 Collider', s2),
-                sec('motion', '03', 'In the simulator', 'Simulator 안에서', s3), sec('photogrammetry', '04', 'Photogrammetry 3D reconstruction', 'Photogrammetry 3D 복원', s4)]
-    toc_items = [('assets', '01 Assets', '01 자산'), ('collision', '02 Colliders', '02 Collider'), ('motion', '03 In the simulator', '03 Simulator'), ('photogrammetry', '04 Photogrammetry', '04 Photogrammetry')]
+                sec('motion', '03', 'Step by step', '단계별 비교', s3), sec('photogrammetry', '04', 'Photogrammetry 3D reconstruction', 'Photogrammetry 3D 복원', s4)]
+    toc_items = [('assets', '01 Assets', '01 자산'), ('collision', '02 Colliders', '02 Collider'), ('motion', '03 Step by step', '03 단계별 비교'), ('photogrammetry', '04 Photogrammetry', '04 Photogrammetry')]
     nxt = next_link('tmad.html', '', '', 'TMAD', 'Back to the main research: zero-shot sim-to-real for two arms', '주 연구로: 양팔 Zero-shot Sim-to-Real')
     case_page(p, 'sim-assets.html', 'Simulation assets | Sunghyun Park', 'Real tools rebuilt for Isaac Lab: CAD broom and supporter, dustpan resized to the lab one, cans with real labels, colliders, photogrammetry.', header, hero, sections, toc_items, nxt)
 
