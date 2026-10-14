@@ -4,7 +4,8 @@ Personal site of Sunghyun Park (박성현): bimanual robot learning, teacher-stu
 
 Live: https://parksh20.github.io (Korean: https://parksh20.github.io/?lang=ko)
 
-- `index.html`: the whole page, English and Korean text side by side (`.en` / `.ko`)
-- `assets/css/site.css`, `assets/js/site.js`: style, language switch, video play on scroll, figure zoom
-- `assets/img`: figures (WebP), Open Graph image, favicon
+- `index.html` and `work/*.html` are generated. Edit `_build/build.py`, then run `python _build/build.py`.
+  Every visible string is written twice through `T(en, ko)`.
+- `assets/css/site.css`, `assets/js/site.js`: style, language switch, nav over the hero, video play on scroll, chart animation, figure zoom
+- `assets/img`: photos and figures (WebP), Open Graph image, favicon
 - `assets/video`: real-robot and simulation clips (H.264, no audio)

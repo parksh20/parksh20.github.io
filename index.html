@@ -4,723 +4,190 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sunghyun Park | Robot Learning</title>
-<meta name="description" content="Sunghyun Park (박성현), M.S. student at Kyung Hee University. Bimanual robot policies trained in simulation and transferred zero-shot to a real robot: teacher-student distillation (TMAD), VLA, Isaac Lab.">
+<meta name="description" content="Sunghyun Park (박성현). Bimanual robot policies trained in simulation and run on a real robot zero-shot: teacher-student distillation (TMAD), VLA, Isaac Lab.">
 <meta name="author" content="Sunghyun Park">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sunghyun Park">
 <meta property="og:title" content="Sunghyun Park | Robot Learning">
-<meta property="og:description" content="Zero-shot sim-to-real bimanual manipulation. TMAD student on a real robot: 72.0% Pick-and-Place, 84.0% Handover.">
+<meta property="og:description" content="Sunghyun Park (박성현). Bimanual robot policies trained in simulation and run on a real robot zero-shot: teacher-student distillation (TMAD), VLA, Isaac Lab.">
 <meta property="og:image" content="https://parksh20.github.io/assets/img/og.jpg">
 <meta property="og:url" content="https://parksh20.github.io/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#26336A">
+<meta name="theme-color" content="#0b0d12">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="assets/css/site.css">
 <script>
 (function () {
   var l = 'en';
   try {
-    var q = new URLSearchParams(location.search).get('lang');
-    var s = null;
+    var q = new URLSearchParams(location.search).get('lang'), s = null;
     try { s = localStorage.getItem('lang'); } catch (e) {}
     l = q || s || ((navigator.language || '').toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en');
   } catch (e) {}
   if (l !== 'ko') l = 'en';
   document.documentElement.setAttribute('data-lang', l);
   document.documentElement.lang = l;
+  document.documentElement.classList.add('js-reveal');
 })();
 </script>
 </head>
-<body>
+<body data-hero>
 <a class="skip" href="#main">Skip to content</a>
-
-<header class="nav">
+<header class="nav on-dark" id="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="#top">Sunghyun Park</a>
-    <nav class="links" aria-label="Sections">
-      <a href="#research"><span class="en">Research</span><span class="ko" lang="ko">연구</span></a>
-      <a href="#projects"><span class="en">Projects</span><span class="ko" lang="ko">프로젝트</span></a>
-      <a href="#publications"><span class="en">Publications</span><span class="ko" lang="ko">논문</span></a>
-      <a href="#about"><span class="en">About</span><span class="ko" lang="ko">소개</span></a>
-    </nav>
-    <div class="lang" role="group" aria-label="Language">
-      <button type="button" data-set-lang="en">EN</button>
-      <button type="button" data-set-lang="ko">KO</button>
+    <a class="brand" href="#top"><span class="mark">SP</span><span>Sunghyun Park</span></a>
+    <nav class="nav-links" aria-label="Sections"><a href="#work"><span class="en">Work</span><span class="ko" lang="ko">작업</span></a><a href="#about"><span class="en">About</span><span class="ko" lang="ko">소개</span></a><a href="#publications"><span class="en">Publications</span><span class="ko" lang="ko">논문</span></a><a href="#contact"><span class="en">Contact</span><span class="ko" lang="ko">연락</span></a></nav>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Language"><button type="button" data-set-lang="en">EN</button><button type="button" data-set-lang="ko">KO</button></div>
+      <a class="nav-cta" href="mailto:parksh000124@gmail.com"><span class="en">Email</span><span class="ko" lang="ko">이메일</span></a>
     </div>
   </div>
 </header>
-
 <main id="main">
-
-<!-- HERO -->
 <section class="hero" id="top">
-  <div class="wrap hero-grid">
-    <div class="hero-text">
-      <p class="kicker">Robot learning <span class="sep">/</span> Bimanual manipulation</p>
-      <h1 class="name">Sunghyun Park<span class="name-ko" lang="ko">박성현</span></h1>
-      <p class="lead en">Bimanual robot policies trained only in simulation, transferred to a real robot with no additional real-robot training.</p>
-      <p class="lead ko" lang="ko">시뮬레이션에서만 학습한 양팔 Policy를 실물 추가 학습 없이 실제 로봇에 전이</p>
-      <p class="affil en">M.S. student, Electronics and Information Convergence Engineering, Kyung Hee University. Graduating February 2027.</p>
-      <p class="affil ko" lang="ko">경희대학교 대학원 전자정보융합공학과 석사과정, 2027년 2월 졸업 예정</p>
-      <ul class="chips" aria-label="Topics">
-        <li>Zero-shot Sim-to-Real</li>
-        <li>Teacher-Student Distillation</li>
-        <li>VLA</li>
-        <li>Isaac Lab</li>
-        <li>UR3 × 2 + Allegro Hand × 2</li>
-      </ul>
-      <div class="cta">
-        <a class="btn primary" href="mailto:parksh000124@gmail.com">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m3.5 7 8.5 6.5L20.5 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
-          parksh000124@gmail.com
-        </a>
-        <a class="btn" href="#research"><span class="en">See the research</span><span class="ko" lang="ko">연구 보기</span></a>
-        <a class="btn ghost" href="https://github.com/parksh20" aria-label="GitHub profile">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
-          GitHub
-        </a>
-      </div>
-    </div>
-
-    <figure class="hero-media">
-      <div class="vframe">
-        <video class="autoplay" src="assets/video/real_pnp.mp4" poster="assets/video/real_pnp.jpg" muted loop playsinline preload="metadata" aria-label="Real robot: TMAD student places a red can and a green can into the bin"></video>
-        <div class="vtags"><span class="tag tag-real">Real robot</span><span class="tag">Zero-shot</span><span class="tag">2× speed</span></div>
-      </div>
-      <figcaption>
-        <span class="en">TMAD student on Pick-and-Place. Two UR3 arms with Allegro hands, trained only in Isaac Lab.</span>
-        <span class="ko" lang="ko">TMAD student, Pick-and-Place. UR3 양팔과 Allegro Hand, Isaac Lab에서만 학습</span>
-      </figcaption>
-    </figure>
-  </div>
-
   <div class="wrap">
-    <div class="stats">
-      <div class="stat">
-        <p class="stat-num">72.0<span>%</span></p>
-        <p class="stat-label"><span class="en">Pick-and-Place on the real robot</span><span class="ko" lang="ko">Pick-and-Place, Real robot</span></p>
-        <p class="stat-sub"><span class="en">Baseline 28.0%, +44.0 pp</span><span class="ko" lang="ko">Baseline 28.0%, +44.0%p</span></p>
+    <p class="status"><span class="dot"></span><span class="en">Graduating February 2027, open to full-time roles</span><span class="ko" lang="ko">2027년 2월 졸업 예정, 채용 문의 환영</span></p>
+    <div class="hero-name"><h1>Sunghyun Park</h1><span class="ko-name">박성현</span></div>
+    <div class="hero-grid">
+      <div>
+        <p class="hero-role"><span class="en">Robot learning for bimanual manipulation</span><span class="ko" lang="ko">양팔 로봇 조작을 위한 Robot learning</span></p>
+        <p class="hero-desc"><span class="en">Policies trained only in simulation, run on a real two-arm robot with no additional real-robot training.</span><span class="ko" lang="ko">시뮬레이션에서만 학습한 양팔 Policy를 실물 추가 학습 없이 실제 로봇에 전이</span></p>
+        <div class="hero-cta">
+          <a class="btn btn-light" href="#work"><span class="en">View work</span><span class="ko" lang="ko">작업 보기</span> <svg class="arrow" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-ghost-dark" href="mailto:parksh000124@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m3.5 7 8.5 6.5L20.5 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg> <span class="en">Email</span><span class="ko" lang="ko">이메일</span></a>
+        </div>
+        <div class="hero-facts">
+          <p><b><span class="en">Now</span><span class="ko" lang="ko">현재</span></b><span><span class="en">M.S. student, Kyung Hee University</span><span class="ko" lang="ko">경희대학교 대학원 석사과정</span></span></p>
+          <p><b><span class="en">Robot</span><span class="ko" lang="ko">로봇</span></b><span>UR3 × 2, Allegro Hand × 2</span></p>
+          <p><b><span class="en">Tools</span><span class="ko" lang="ko">도구</span></b><span>Isaac Lab, PyTorch, PPO, LeRobot</span></p>
+        </div>
       </div>
-      <div class="stat">
-        <p class="stat-num">84.0<span>%</span></p>
-        <p class="stat-label"><span class="en">Handover on the real robot</span><span class="ko" lang="ko">Handover, Real robot</span></p>
-        <p class="stat-sub"><span class="en">Baseline 24.0%, +60.0 pp</span><span class="ko" lang="ko">Baseline 24.0%, +60.0%p</span></p>
-      </div>
-      <div class="stat">
-        <p class="stat-num">75</p>
-        <p class="stat-label"><span class="en">Real-robot trials per task</span><span class="ko" lang="ko">작업별 실물 시행 수</span></p>
-        <p class="stat-sub"><span class="en">3 runs × 25 trials, zero-shot</span><span class="ko" lang="ko">3 runs × 25 trials, 실물 추가 학습 없음</span></p>
-      </div>
-      <div class="stat stat-alt">
-        <p class="stat-num">83.4<span>%</span></p>
-        <p class="stat-label"><span class="en">VLA task success, simulation</span><span class="ko" lang="ko">VLA Task success rate, Simulation</span></p>
-        <p class="stat-sub"><span class="en">from 41.0% with DAgger and Residual RL distillation</span><span class="ko" lang="ko">DAgger와 Residual RL distillation으로 41.0%에서</span></p>
-      </div>
+      <div class="hero-media"><div class="media r169"><div class="tags"><span class="tag tag-real">Real robot</span><span class="tag">Zero-shot</span><span class="tag">2× speed</span></div><video class="autoplay" src="assets/video/hero_pnp.mp4" poster="assets/video/hero_pnp.jpg" muted loop playsinline preload="metadata" aria-label="Real robot: TMAD student places a red can and a green can into the bin"></video><div class="media-cap"><span class="en">TMAD student, Pick-and-Place</span><span class="ko" lang="ko">TMAD student, Pick-and-Place</span></div></div></div>
     </div>
-    <p class="stats-note">
-      <span class="en">Baseline: the single-arm DextrAH-RGB student, which I ported to two arms. Success means all 5 subgoals were completed.</span>
-      <span class="ko" lang="ko">Baseline: 단일 팔용 DextrAH-RGB를 양팔로 직접 이식한 Student. 성공 = Subgoal 5개를 모두 마친 Trial</span>
-    </p>
+    <div class="hero-stats">
+      <div class="hstat"><p class="hstat-num red">72.0<small>%</small></p><p class="hstat-label"><span class="en">Pick-and-Place, real robot</span><span class="ko" lang="ko">Pick-and-Place, 실물</span></p><p class="hstat-sub">Baseline 28.0%</p></div>
+      <div class="hstat"><p class="hstat-num red">84.0<small>%</small></p><p class="hstat-label"><span class="en">Handover, real robot</span><span class="ko" lang="ko">Handover, 실물</span></p><p class="hstat-sub">Baseline 24.0%</p></div>
+      <div class="hstat"><p class="hstat-num">75</p><p class="hstat-label"><span class="en">Real-robot trials per task</span><span class="ko" lang="ko">작업별 실물 시행</span></p><p class="hstat-sub">3 runs × 25 trials</p></div>
+      <div class="hstat hstat-note"><span class="en">TMAD student compared with the single-arm DextrAH-RGB student ported to two arms. Zero-shot: no additional training on the real robot.</span><span class="ko" lang="ko">TMAD student와, 단일 팔용 DextrAH-RGB를 양팔로 이식한 Student의 비교. 실물 추가 학습 없음</span></div>
+    </div>
   </div>
 </section>
-
-<!-- RESEARCH: TMAD -->
-<section class="section" id="research">
+<section class="sec" id="work">
   <div class="wrap">
-    <header class="sec-head">
-      <p class="kicker"><span class="num">01</span> Research <span class="sep">|</span> <span class="en">First author</span><span class="ko" lang="ko">제1저자</span></p>
-      <h2>TMAD: Temporal Multi-Agent Distillation</h2>
-      <p class="sec-sub">for Bimanual Long-Horizon Manipulation</p>
-      <ul class="badges">
-        <li><span class="en">ICCR 2026, under review</span><span class="ko" lang="ko">ICCR 2026 심사 중</span></li>
-        <li><span class="en">Patent application filed</span><span class="ko" lang="ko">특허 출원</span></li>
-        <li><span class="en">M.S. thesis</span><span class="ko" lang="ko">석사 학위논문</span></li>
-      </ul>
+    <header class="sec-head"><p class="label"><span class="num-tag">01</span><span class="sep">/</span>Work</p>
+      <div class="sec-side"><h2><span class="en">Selected work</span><span class="ko" lang="ko">주요 작업</span></h2><p class="sec-desc"><span class="en">Four projects from my M.S., from simulation assets to a policy running on a real robot.</span><span class="ko" lang="ko">석사 과정의 네 프로젝트. Simulation asset부터 실제 로봇에서 동작하는 Policy까지</span></p></div>
     </header>
-
-    <div class="problem">
-      <article class="pcard">
-        <p class="pcard-tag">Simulation</p>
-        <ul class="en">
-          <li>The simulator gives object position and pose directly</li>
-          <li>A policy can learn the task without vision</li>
-        </ul>
-        <ul class="ko" lang="ko">
-          <li>물체 위치와 자세를 Simulator가 직접 제공</li>
-          <li>Vision 없이도 Policy 학습 가능</li>
-        </ul>
-      </article>
-      <article class="pcard">
-        <p class="pcard-tag">Real robot</p>
-        <ul class="en">
-          <li>Object pose has to be estimated from cameras with a 6D pose estimator</li>
-          <li>Estimation error and latency pass straight into the policy</li>
-        </ul>
-        <ul class="ko" lang="ko">
-          <li>물체 자세를 카메라와 6D pose estimator로 추정</li>
-          <li>추정 오차와 지연이 Policy로 전달</li>
-        </ul>
-      </article>
-      <article class="pcard pcard-idea">
-        <p class="pcard-tag"><span class="en">Approach</span><span class="ko" lang="ko">제안</span></p>
-        <p class="idea en">Use the teacher only for training. On the real robot, run a student that sees two RGB images and the joint states.</p>
-        <p class="idea ko" lang="ko">Teacher는 학습에만 쓰고, 실행은 영상과 관절 값만 보는 Student가 맡는다</p>
-        <p class="idea-sub en">TMAD treats the two arms as two agent tokens (multi-agent) and gives the vision student a 32-step history (temporal).</p>
-        <p class="idea-sub ko" lang="ko">양팔을 두 Agent token으로 다루는 구조(Multi-Agent)에 최근 32 step 이력(Temporal)을 더한 영상 Student</p>
-      </article>
+    <div class="work-list">
+<a class="wcard wcard-feature" href="work/tmad.html" data-reveal>
+  <div class="wcard-media">
+    <div class="pip-main"><div class="media r169"><div class="tags"><span class="tag tag-real">Real robot</span><span class="tag">Zero-shot</span><span class="tag">2×</span></div><video class="autoplay" src="assets/video/real_handover.mp4" poster="assets/video/real_handover.jpg" muted loop playsinline preload="none" aria-label="Real robot Handover"></video><div class="media-cap"><span class="en">Handover, robot camera</span><span class="ko" lang="ko">Handover, 로봇 카메라</span></div></div></div>
+    <div class="pip"><div class="media r169"><div class="tags"><span class="tag tag-sim">Simulation</span></div><video class="autoplay" src="assets/video/sim_handover.mp4" poster="assets/video/sim_handover.jpg" muted loop playsinline preload="none" aria-label="Simulation Handover"></video></div></div>
+  </div>
+  <div class="wcard-body">
+    <p class="label"><span class="num-tag">01</span><span class="sep">/</span><span class="en">Research, first author</span><span class="ko" lang="ko">연구, 제1저자</span><span class="sep">/</span>2026</p>
+    <h3>TMAD<small>Temporal Multi-Agent Distillation for Bimanual Long-Horizon Manipulation</small></h3>
+    <p class="wdesc"><span class="en">A teacher that reads object states in simulation, distilled into a student that sees two RGB images and joint states. Only the student runs on the real robot.</span><span class="ko" lang="ko">Simulation에서 물체 상태를 받는 Teacher를, 영상 두 장과 관절 값만 보는 Student로 Distillation. 실제 로봇에서는 Student만 실행</span></p>
+    <div class="chips"><span class="chip hl"><span class="en">ICCR 2026, under review</span><span class="ko" lang="ko">ICCR 2026 심사 중</span></span><span class="chip"><span class="en">Patent application filed</span><span class="ko" lang="ko">특허 출원</span></span><span class="chip"><span class="en">M.S. thesis</span><span class="ko" lang="ko">석사 학위논문</span></span></div>
+    <div class="wmetrics">
+      <div class="wmetric"><b>72.0%</b><span><span class="en">Pick-and-Place, real robot</span><span class="ko" lang="ko">Pick-and-Place, 실물</span></span><span class="mono">Baseline 28.0%</span></div>
+      <div class="wmetric"><b>84.0%</b><span><span class="en">Handover, real robot</span><span class="ko" lang="ko">Handover, 실물</span></span><span class="mono">Baseline 24.0%</span></div>
     </div>
-
-    <figure class="fig">
-      <button class="zoom" type="button" data-zoom="assets/img/tmad_pipeline.webp" aria-label="Enlarge figure">
-        <img src="assets/img/tmad_pipeline.webp" width="2400" height="698" loading="lazy" alt="TMAD pipeline: (1) teacher learns the task in simulation, (2) student copies the teacher from rendered images, (3) only the student is deployed on the real robot.">
-      </button>
-      <figcaption>
-        <span class="en"><b>Pipeline.</b> (1) The teacher learns the task in simulation from object pose, goal and joints (BC on 300 demos, then PPO). (2) The student learns the teacher's actions from rendered and randomized images through online distillation. (3) Only the student runs on the real robot, with no 6D pose estimator and no real-robot training data.</span>
-        <span class="ko" lang="ko"><b>학습 파이프라인.</b> (1) Teacher가 Simulation에서 물체 자세, 목표, 관절 값으로 작업 학습(BC 300 demos 뒤 PPO) (2) Student가 렌더링과 Randomization을 거친 영상으로 Teacher의 Action을 학습(Online distillation) (3) 실물에서는 Student만 실행. 6D pose estimator와 실물 학습 데이터 없음</span>
-      </figcaption>
-    </figure>
-
-    <div class="tasks">
-      <div class="task">
-        <h3>Pick-and-Place</h3>
-        <p class="en">Each arm picks a can and puts it in the center bin.</p>
-        <p class="ko" lang="ko">두 팔이 각각 캔을 집어 가운데 상자에 넣기</p>
-      </div>
-      <div class="task">
-        <h3>Handover</h3>
-        <p class="en">One arm picks up a tube and passes it to the other arm, which places it.</p>
-        <p class="ko" lang="ko">한 팔이 집은 튜브를 다른 팔에 넘겨 놓기</p>
-      </div>
-      <div class="task">
-        <h3><span class="en">Success</span><span class="ko" lang="ko">성공 기준</span></h3>
-        <p class="en">A trial counts only if all 5 subgoals are completed.</p>
-        <p class="ko" lang="ko">Subgoal 5개를 모두 마친 Trial만 성공</p>
-      </div>
-    </div>
-
-    <div class="videos">
-      <figure class="vcell">
-        <div class="vframe">
-          <video class="autoplay" src="assets/video/real_pnp.mp4" poster="assets/video/real_pnp.jpg" muted loop playsinline preload="none" aria-label="Real robot Pick-and-Place, third-person view"></video>
-          <div class="vtags"><span class="tag tag-real">Real robot</span><span class="tag">2×</span></div>
-        </div>
-        <figcaption><span class="en">Pick-and-Place, third-person view</span><span class="ko" lang="ko">Pick-and-Place, 3인칭 영상</span></figcaption>
-      </figure>
-      <figure class="vcell">
-        <div class="vframe">
-          <video class="autoplay" src="assets/video/real_handover.mp4" poster="assets/video/real_handover.jpg" muted loop playsinline preload="none" aria-label="Real robot Handover, robot's left stereo camera"></video>
-          <div class="vtags"><span class="tag tag-real">Real robot</span><span class="tag">2×</span></div>
-        </div>
-        <figcaption><span class="en">Handover, the robot's left stereo camera</span><span class="ko" lang="ko">Handover, 로봇 Stereo 카메라 왼쪽 영상</span></figcaption>
-      </figure>
-      <figure class="vcell">
-        <div class="vframe">
-          <video class="autoplay" src="assets/video/sim_pnp.mp4" poster="assets/video/sim_pnp.jpg" muted loop playsinline preload="none" aria-label="Simulation Pick-and-Place in Isaac Lab"></video>
-          <div class="vtags"><span class="tag tag-sim">Simulation</span><span class="tag">1×</span></div>
-        </div>
-        <figcaption><span class="en">Pick-and-Place in Isaac Lab</span><span class="ko" lang="ko">Pick-and-Place, Isaac Lab</span></figcaption>
-      </figure>
-      <figure class="vcell">
-        <div class="vframe">
-          <video class="autoplay" src="assets/video/sim_handover.mp4" poster="assets/video/sim_handover.jpg" muted loop playsinline preload="none" aria-label="Simulation Handover in Isaac Lab"></video>
-          <div class="vtags"><span class="tag tag-sim">Simulation</span><span class="tag">1×</span></div>
-        </div>
-        <figcaption><span class="en">Handover in Isaac Lab</span><span class="ko" lang="ko">Handover, Isaac Lab</span></figcaption>
-      </figure>
-    </div>
-    <p class="note"><span class="en">All clips show the TMAD student. Real-robot clips are trimmed and played at 2× speed.</span><span class="ko" lang="ko">모두 TMAD student 성공 시행. 실물 영상은 앞부분을 자르고 2배속</span></p>
-
-    <figure class="fig">
-      <button class="zoom" type="button" data-zoom="assets/img/tmad_student.webp" aria-label="Enlarge figure">
-        <img src="assets/img/tmad_student.webp" width="2400" height="985" loading="lazy" alt="Student policy: shared ResNet-18 encoders, stereo cross-attention, arm tokens, observation encoder, causal temporal transformer over 32 steps, autoregressive decoder, 14-D action.">
-      </button>
-      <figcaption>
-        <span class="en"><b>Student policy.</b> The teacher's two-arm structure stays as it is. The student adds a shared stereo encoder with cross-attention and a causal temporal transformer over the last 32 steps. The object pose head is an auxiliary loss used only in training; at deployment the policy gets no object pose.</span>
-        <span class="ko" lang="ko"><b>Student policy 구조.</b> Teacher의 양팔 구조는 그대로 두고, 영상 입력과 최근 32 step 이력을 더함. Object pose head는 학습 때만 쓰는 보조 손실이고, 실행할 때 물체 자세 입력 없음</span>
-      </figcaption>
-    </figure>
-
-    <div class="results">
-      <div class="results-head">
-        <h3><span class="en">Close in simulation, far apart on the real robot</span><span class="ko" lang="ko">Simulation에서는 비슷했던 두 Student가 Real robot에서는 크게 갈림</span></h3>
-        <ul class="legend">
-          <li><i class="sw sw-t"></i><span class="en">Teacher (simulation only)</span><span class="ko" lang="ko">Teacher (Simulation만)</span></li>
-          <li><i class="sw sw-b"></i>Baseline student</li>
-          <li><i class="sw sw-s"></i>TMAD student (ours)</li>
-        </ul>
-      </div>
-      <div class="charts">
-        <div class="chart" role="img" aria-label="Simulation success rates. Pick-and-Place: teacher 91.2, baseline 83.0, TMAD 86.0. Handover: teacher 88.6, baseline 76.2, TMAD 84.8.">
-          <p class="chart-title">Simulation <span>5 runs × 100 trials</span></p>
-          <div class="plot">
-            <div class="gridlines"><i style="--y:100"><b>100</b></i><i style="--y:75"><b>75</b></i><i style="--y:50"><b>50</b></i><i style="--y:25"><b>25</b></i><i style="--y:0"><b>0</b></i></div>
-            <div class="cols">
-              <div class="col"><div class="bar bar-t" style="--v:91.2"><b>91.2</b></div><div class="bar bar-b" style="--v:83.0"><b>83.0</b></div><div class="bar bar-s" style="--v:86.0"><b>86.0</b></div></div>
-              <div class="col"><div class="bar bar-t" style="--v:88.6"><b>88.6</b></div><div class="bar bar-b" style="--v:76.2"><b>76.2</b></div><div class="bar bar-s" style="--v:84.8"><b>84.8</b></div></div>
-            </div>
-          </div>
-          <div class="xlabels"><span>Pick-and-Place</span><span>Handover</span></div>
-        </div>
-        <div class="chart" role="img" aria-label="Real robot success rates, zero-shot. Pick-and-Place: baseline 28.0, TMAD 72.0. Handover: baseline 24.0, TMAD 84.0.">
-          <p class="chart-title">Real robot <span>3 runs × 25 trials, zero-shot</span></p>
-          <div class="plot">
-            <div class="gridlines"><i style="--y:100"><b>100</b></i><i style="--y:75"><b>75</b></i><i style="--y:50"><b>50</b></i><i style="--y:25"><b>25</b></i><i style="--y:0"><b>0</b></i></div>
-            <div class="cols">
-              <div class="col"><div class="bar bar-b" style="--v:28.0"><b>28.0</b></div><div class="bar bar-s" style="--v:72.0"><b>72.0</b></div></div>
-              <div class="col"><div class="bar bar-b" style="--v:24.0"><b>24.0</b></div><div class="bar bar-s" style="--v:84.0"><b>84.0</b></div></div>
-            </div>
-          </div>
-          <div class="xlabels"><span>Pick-and-Place</span><span>Handover</span></div>
-        </div>
-        <div class="gap">
-          <p class="gap-title"><span class="en">TMAD minus baseline</span><span class="ko" lang="ko">TMAD와 Baseline의 차이</span></p>
-          <div class="gap-task">
-            <p class="gap-name">Pick-and-Place</p>
-            <p class="gap-row"><span>Simulation</span><b>+3.0</b></p>
-            <p class="gap-row gap-real"><span>Real robot</span><b>+44.0</b></p>
-          </div>
-          <div class="gap-task">
-            <p class="gap-name">Handover</p>
-            <p class="gap-row"><span>Simulation</span><b>+8.6</b></p>
-            <p class="gap-row gap-real"><span>Real robot</span><b>+60.0</b></p>
-          </div>
-          <p class="gap-unit"><span class="en">percentage points</span><span class="ko" lang="ko">단위 %p</span></p>
-        </div>
-      </div>
-      <p class="note">
-        <span class="en">Mean success rate (%), from Table I of the paper. Kept the same for both students: teacher, inputs, vision encoder, action space, randomization and training length. The teacher needs object states from the simulator, so it does not run on the real robot.</span>
-        <span class="ko" lang="ko">평균 성공률(%), 원고 Table I. 두 Student에 같게 둔 조건: Teacher, 입력, Vision encoder, Action space, Randomization, 학습 길이. Teacher는 Simulator의 물체 상태를 받아야 해서 실물에서는 실행하지 않음</span>
-      </p>
-    </div>
-
-    <div class="split">
-      <div class="role">
-        <h3><span class="en">My part</span><span class="ko" lang="ko">내 담당</span></h3>
-        <ol class="role-list">
-          <li>
-            <p class="role-name"><span class="en">Teacher training</span><span class="ko" lang="ko">Teacher 학습</span></p>
-            <p class="en">Pick-and-Place teacher. When training collapsed, logged KL and action std to trace the cause.</p>
-            <p class="ko" lang="ko">Pick-and-Place. 학습 붕괴 때 KL과 Action std를 추가 기록해 원인 추적</p>
-          </li>
-          <li>
-            <p class="role-name"><span class="en">Student design</span><span class="ko" lang="ko">Student 설계</span></p>
-            <p class="en">Added stereo vision and a 32-step temporal transformer.</p>
-            <p class="ko" lang="ko">Stereo vision과 32 step Temporal transformer 추가</p>
-          </li>
-          <li>
-            <p class="role-name"><span class="en">Distillation</span><span class="ko" lang="ko">Distillation 구현</span></p>
-            <p class="en">Modified the single-arm DextrAH-RGB public code for two-arm inputs and outputs.</p>
-            <p class="ko" lang="ko">단일 팔용 DextrAH-RGB 공개 코드를 양팔 입출력으로 수정</p>
-          </li>
-          <li>
-            <p class="role-name"><span class="en">Experiments and paper</span><span class="ko" lang="ko">비교 실험과 원고</span></p>
-            <p class="en">Pick-and-Place comparison experiments, first-author manuscript.</p>
-            <p class="ko" lang="ko">Pick-and-Place 비교 실험, 제1저자 원고</p>
-          </li>
-        </ol>
-      </div>
-      <div class="case">
-        <p class="case-tag"><span class="en">Problem solving</span><span class="ko" lang="ko">문제 해결</span></p>
-        <h3><span class="en">The first real-robot run</span><span class="ko" lang="ko">첫 Real robot 실행</span></h3>
-        <dl class="steps">
-          <dt><span class="en">Symptom</span><span class="ko" lang="ko">현상</span></dt>
-          <dd><span class="en">The student barely moved on the real robot.</span><span class="ko" lang="ko">처음 실물에 올린 Student가 거의 움직이지 않음</span></dd>
-          <dt><span class="en">Analysis</span><span class="ko" lang="ko">분석</span></dt>
-          <dd><span class="en">Compared real and simulated images and inputs, then reproduced the same symptom in a simulation with added noise.</span><span class="ko" lang="ko">실물과 Simulation의 영상, 입력값을 비교하고 Noise를 넣은 Simulation에서 같은 증상 재현</span></dd>
-          <dt><span class="en">Fix</span><span class="ko" lang="ko">조치</span></dt>
-          <dd><span class="en">Physics randomization for the teacher, image color and camera pose randomization for the student, then retraining.</span><span class="ko" lang="ko">Teacher에 Physics randomization, Student에 영상 색과 카메라 위치 Randomization을 더해 재학습</span></dd>
-          <dt><span class="en">Result</span><span class="ko" lang="ko">결과</span></dt>
-          <dd><span class="en">With changes made only in simulation, the policy started working on the real robot.</span><span class="ko" lang="ko">실물 데이터 없이 Simulation만 고쳐 실물에서 Policy가 동작하기 시작</span></dd>
-        </dl>
-      </div>
-    </div>
-
-    <div class="followup">
-      <div class="followup-text">
-        <p class="kicker small"><span class="en">Follow-up, after the paper</span><span class="ko" lang="ko">논문 이후 후속 연구</span> <span class="sep">|</span> Simulation</p>
-        <h3><span class="en">Direct control of all 16 finger joints</span><span class="ko" lang="ko">손가락 16관절 직접 제어</span></h3>
-        <p class="en">In the paper, each Allegro hand moved by one grip command. The follow-up policy sets all 16 finger joints of each hand directly and predicts a 4-step action chunk per query.</p>
-        <p class="ko" lang="ko">그립 명령 하나로 움직이던 Allegro 손가락을 Policy가 16관절 모두 직접 정하도록 확장. 한 번의 추론으로 4 step Action chunk 예측</p>
-        <div class="mini-stats">
-          <p><b>99.3%</b><span>Teacher, 993 / 1,000</span></p>
-          <p><b>94.7%</b><span>Student, 142 / 150</span></p>
-        </div>
-        <p class="note"><span class="en">Pick-and-Place in simulation.</span><span class="ko" lang="ko">Simulation Pick-and-Place 결과</span></p>
-      </div>
-      <figure class="fig">
-        <button class="zoom" type="button" data-zoom="assets/img/tmad_followup.webp" aria-label="Enlarge figure">
-          <img src="assets/img/tmad_followup.webp" width="2400" height="1014" loading="lazy" alt="Follow-up: action goes from one grip command to 16 finger joints per hand, 4-step action chunks, teacher with entity tokens, student with stereo RGB and object tokens, shared bimanual policy.">
-        </button>
-      </figure>
-    </div>
+    <span class="wmore"><span class="en">Read the case study</span><span class="ko" lang="ko">자세히 보기</span> <svg class="arrow" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  </div>
+</a><div class="work-two">
+<a class="wcard wcard-col" href="work/vla.html" data-reveal>
+  <div class="wcard-media vla-media"><div class="vla-vis">
+    <p class="vla-quote"><span class="label"><span class="en">Instruction</span><span class="ko" lang="ko">지시문</span></span>"Put the green can on the pad first, then the red can."</p>
+    <div class="vla-roles"><p><span class="who navy">VLM planner</span><span class="what">green</span></p><p><span class="who red">SmolVLA</span><span class="what">"put the green can on the pad"</span></p></div>
+    <div class="vla-strip"><figure><span class="call">green</span><img src="assets/img/v_seq_1.webp" alt="start" loading="lazy"><figcaption>start</figcaption></figure><figure><span class="call">red</span><img src="assets/img/v_seq_3.webp" alt="green placed" loading="lazy"><figcaption>green placed</figcaption></figure><figure><span class="call none">-</span><img src="assets/img/v_seq_4.webp" alt="grasp red" loading="lazy"><figcaption>grasp red</figcaption></figure><figure><span class="call">done</span><img src="assets/img/v_seq_5.webp" alt="both placed" loading="lazy"><figcaption>both placed</figcaption></figure></div>
+  </div></div>
+  <div class="wcard-body">
+    <p class="label"><span class="num-tag">02</span><span class="sep">/</span><span class="en">Personal project</span><span class="ko" lang="ko">개인 프로젝트</span><span class="sep">/</span>2026.10<span class="sep">/</span>Simulation</p>
+    <h3>VLM planner + SmolVLA<small><span class="en">Language instructions for the same two-arm robot</span><span class="ko" lang="ko">같은 양팔 로봇의 자연어 지시 수행</span></small></h3>
+    <p class="wdesc"><span class="en">A fine-tuned VLM picks the next skill, SmolVLA moves both arms. Grasp failures fixed with takeover DAgger and Residual RL distillation.</span><span class="ko" lang="ko">Fine-tuning한 VLM이 다음 skill을 고르고 SmolVLA가 두 팔을 움직임. Grasp 실패는 Takeover DAgger와 Residual RL distillation으로 해결</span></p>
+    <div class="wmetrics"><div class="wmetric navy"><b><s>41.0</s>83.4%</b><span><span class="en">Task success rate, before and after the fixes (simulation)</span><span class="ko" lang="ko">Task success rate, 교정 전과 후(Simulation)</span></span></div></div>
+    <span class="wmore"><span class="en">Read the case study</span><span class="ko" lang="ko">자세히 보기</span> <svg class="arrow" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  </div>
+</a>
+<a class="wcard wcard-col" href="work/ur2026.html" data-reveal>
+  <div class="wcard-media"><img src="assets/img/u_sweep_4.webp" alt="Bimanual sweeping in simulation and on the real robot" loading="lazy" style="object-position:left center"></div>
+  <div class="wcard-body">
+    <p class="label"><span class="num-tag">03</span><span class="sep">/</span><span class="en">Co-author</span><span class="ko" lang="ko">공동저자</span><span class="sep">/</span>UR 2026</p>
+    <h3>Upper-Humanoid Real2Sim2Real<small><span class="en">Perception, sweeping assets and the sweeping task in a team system</span><span class="ko" lang="ko">팀 시스템에서 Perception, Sweeping asset, Sweeping task 담당</span></small></h3>
+    <p class="wdesc"><span class="en">A YOLO detector that starts FoundationPose tracking without a person, a CAD broom for Isaac Lab, and a bimanual sweeping task with stage-wise rewards.</span><span class="ko" lang="ko">사람 개입 없이 FoundationPose 추적을 시작하는 YOLO detector, Isaac Lab용 CAD 빗자루, 단계별 Reward의 양팔 쓸기 작업</span></p>
+    <div class="wmetrics"><div class="wmetric"><b>85.7%</b><span><span class="en">Bimanual Sweeping, real robot (team)</span><span class="ko" lang="ko">Bimanual Sweeping, 실물(팀 결과)</span></span></div><div class="wmetric"><b>82.8%</b><span><span class="en">Cup Handover, real robot (team)</span><span class="ko" lang="ko">Cup Handover, 실물(팀 결과)</span></span></div></div>
+    <span class="wmore"><span class="en">Read the case study</span><span class="ko" lang="ko">자세히 보기</span> <svg class="arrow" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  </div>
+</a></div>
+<a class="wcard wcard-wide" href="work/sim-assets.html" data-reveal>
+  <div class="wcard-media">
+    <div class="media r169"><div class="tags"><span class="tag tag-real">Real</span></div><img src="assets/img/a_real_sweep.webp" alt="Real sweeping setup" loading="lazy"></div>
+    <div class="media r169"><div class="tags"><span class="tag tag-sim">Isaac Lab</span></div><video class="autoplay" src="assets/video/sim_sweep.mp4" poster="assets/video/sim_sweep.jpg" muted loop playsinline preload="none" aria-label="Isaac Lab sweeping scene"></video></div>
+  </div>
+  <div class="wcard-body">
+    <p class="label"><span class="num-tag">04</span><span class="sep">/</span>Simulation assets<span class="sep">/</span>2025 ~ 2026</p>
+    <h3><span class="en">Real tools, rebuilt for Isaac Lab</span><span class="ko" lang="ko">실물 도구를 Isaac Lab으로</span><small><span class="en">Broom, dustpan, broom supporter, cans, photogrammetry</span><span class="ko" lang="ko">빗자루, 쓰레받기, 서포터, 캔, Photogrammetry</span></small></h3>
+    <p class="wdesc"><span class="en">Broom and supporter modeled in CAD, a dustpan resized to the lab one, cans with real label textures. Appearance from photos, collision from separate colliders.</span><span class="ko" lang="ko">빗자루와 서포터는 CAD로 직접 모델링, 쓰레받기는 실험실 크기로, 캔은 실물 라벨 텍스처. 겉모습은 실물 사진 기준, 충돌은 별도 Collider</span></p>
+    <div class="chips"><span class="chip">Fusion</span><span class="chip">Blender</span><span class="chip">USD</span><span class="chip">Meshroom</span><span class="chip">Isaac Lab</span></div>
+    <span class="wmore"><span class="en">Read the case study</span><span class="ko" lang="ko">자세히 보기</span> <svg class="arrow" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  </div>
+</a></div>
   </div>
 </section>
-
-<!-- PROJECTS -->
-<section class="section section-alt" id="projects">
+<section class="sec sec-alt" id="about">
   <div class="wrap">
-    <header class="sec-head">
-      <p class="kicker"><span class="num">02</span> Projects</p>
-      <h2><span class="en">VLA, Real2Sim2Real, simulation assets</span><span class="ko" lang="ko">VLA, Real2Sim2Real, Simulation asset</span></h2>
+    <header class="sec-head"><p class="label"><span class="num-tag">02</span><span class="sep">/</span>About</p>
+      <div class="sec-side"><h2><span class="en">What I work on</span><span class="ko" lang="ko">하는 일</span></h2>
+      <p class="sec-desc"><span class="en">M.S. student at Kyung Hee University, advised by Prof. Tae-Seong Kim. I train policies for a robot with two UR3 arms and Allegro hands in Isaac Lab and test them on the real robot. Before robotics, I took part in medical imaging collaborations and built the AI part of a food recognition app.</span><span class="ko" lang="ko">경희대학교 대학원 석사과정, 지도교수 김태성. Isaac Lab에서 UR3 양팔과 Allegro Hand 로봇의 Policy를 학습하고 실제 로봇에서 검증합니다. 로봇 연구 전에는 의료영상 공동연구에 참여했고 음식 인식 앱의 AI 파트를 맡았습니다.</span></p></div>
     </header>
-
-    <!-- VLA -->
-    <article class="project">
-      <div class="project-head">
-        <p class="kicker small"><span class="en">Personal project</span><span class="ko" lang="ko">개인 프로젝트</span> <span class="sep">|</span> 2026.10 <span class="sep">|</span> Simulation</p>
-        <h3><span class="en">VLA: VLM planner + SmolVLA executor for language instructions</span><span class="ko" lang="ko">VLA: VLM + SmolVLA로 자연어 지시 수행</span></h3>
-        <p class="en">A VLM planner (Qwen3-VL-4B, QLoRA fine-tuned) reads the scene and the instruction and chooses the next skill. A SmolVLA executor generates 44-D action chunks for both arms. Built on the TMAD bimanual environment in Isaac Lab.</p>
-        <p class="ko" lang="ko">지시 해석은 VLM planner(Qwen3-VL-4B, QLoRA Fine-tuning)가, 동작은 SmolVLA executor가 맡도록 나눔. SmolVLA가 양팔 44-D Action chunk 생성. TMAD의 Isaac Lab 양팔 환경 위에 구현</p>
-      </div>
-      <figure class="fig">
-        <button class="zoom" type="button" data-zoom="assets/img/vla_system.webp" aria-label="Enlarge figure">
-          <img src="assets/img/vla_system.webp" width="2400" height="1014" loading="lazy" alt="VLA system: instruction and front camera go to a Qwen3-VL-4B planner that answers the next skill, a SmolVLA executor produces a 44-D action chunk in Isaac Lab; planner examples and one closed-loop episode.">
-        </button>
-      </figure>
-
-      <div class="vla-results">
-        <div class="chart chart-wide" role="img" aria-label="Task success rate by stage: SmolVLA only 26.2, VLM plus SmolVLA 41.0, control 1 45.5, plus DAgger 68.6, control 2 71.8, plus Residual RL 83.4.">
-          <p class="chart-title"><span class="en">Task success rate by stage</span><span class="ko" lang="ko">단계별 Task success rate</span> <span>QLoRA VLM planner, 2 seeds</span></p>
-          <div class="plot">
-            <div class="gridlines"><i style="--y:100"><b>100</b></i><i style="--y:75"><b>75</b></i><i style="--y:50"><b>50</b></i><i style="--y:25"><b>25</b></i><i style="--y:0"><b>0</b></i></div>
-            <div class="cols cols-6">
-              <div class="col"><div class="bar bar-b" style="--v:26.2"><b>26.2</b></div></div>
-              <div class="col"><div class="bar bar-s" style="--v:41.0"><b>41.0</b></div></div>
-              <div class="col"><div class="bar bar-b" style="--v:45.5"><b>45.5</b></div></div>
-              <div class="col"><div class="bar bar-s" style="--v:68.6"><b>68.6</b></div></div>
-              <div class="col"><div class="bar bar-b" style="--v:71.8"><b>71.8</b></div></div>
-              <div class="col"><div class="bar bar-s" style="--v:83.4"><b>83.4</b></div></div>
-            </div>
-          </div>
-          <div class="xlabels xlabels-6">
-            <span><span class="en">SmolVLA only</span><span class="ko" lang="ko">SmolVLA 단독</span></span>
-            <span>VLM + SmolVLA</span>
-            <span>Control 1</span>
-            <span>+ DAgger</span>
-            <span>Control 2</span>
-            <span>+ Residual RL</span>
-          </div>
-        </div>
-        <div class="vla-side">
-          <div class="pair">
-            <p class="pair-title"><span class="en">VLM planner accuracy</span><span class="ko" lang="ko">VLM planner 정확도</span></p>
-            <p class="pair-meta"><span class="en">288 test scenes, 3,744 questions</span><span class="ko" lang="ko">Test scene 288장, 3,744문항</span></p>
-            <div class="pair-row">
-              <span class="pair-label"><span class="en">Phrasing seen in training</span><span class="ko" lang="ko">학습에 쓴 표현</span></span>
-              <span class="pair-vals"><s>40.1</s><b>99.5</b></span>
-            </div>
-            <div class="pair-row">
-              <span class="pair-label"><span class="en">Unseen phrasing</span><span class="ko" lang="ko">학습에 없던 표현</span></span>
-              <span class="pair-vals"><s>34.3</s><b>94.2</b></span>
-            </div>
-            <p class="pair-key"><span class="en">Gray: zero-shot Qwen3-VL-4B. Red: after QLoRA fine-tuning.</span><span class="ko" lang="ko">회색 = Zero-shot Qwen3-VL-4B, 빨강 = QLoRA Fine-tuning 뒤</span></p>
-          </div>
-          <div class="pair">
-            <p class="pair-title"><span class="en">Same budget, different data</span><span class="ko" lang="ko">같은 학습량, 다른 데이터</span></p>
-            <div class="pair-row"><span class="pair-label">+ DAgger <span class="muted">vs Control 1</span></span><span class="pair-vals"><b>+23.1</b></span></div>
-            <div class="pair-row"><span class="pair-label">+ Residual RL <span class="muted">vs Control 2</span></span><span class="pair-vals"><b>+11.6</b></span></div>
-            <p class="pair-key"><span class="en">Percentage points. Sign test on episodes paired by instruction: p &lt; 0.001 and p = 0.03.</span><span class="ko" lang="ko">단위 %p. 같은 지시문 episode끼리 Sign test: p &lt; 0.001, p = 0.03</span></p>
-          </div>
-        </div>
-      </div>
-      <dl class="defs">
-        <dt><span class="en">SmolVLA only</span><span class="ko" lang="ko">SmolVLA 단독</span></dt>
-        <dd><span class="en">No VLM planner. One SmolVLA performs the whole task from the full instruction, with the same demos and settings (50k steps). 160 episodes.</span><span class="ko" lang="ko">VLM planner 없이 SmolVLA 하나가 전체 지시문으로 Task 전체를 수행. 같은 Demo, 같은 설정 50k steps. 160 episodes</span></dd>
-        <dt>Control 1</dt>
-        <dd><span class="en">The 50k VLA trained 8k more steps on the original demos only. Same budget as DAgger, without takeover data.</span><span class="ko" lang="ko">50k VLA를 기존 Demo만으로 8k steps 더 학습. DAgger와 학습량은 같고 Takeover 데이터만 없음</span></dd>
-        <dt>Control 2</dt>
-        <dd><span class="en">The DAgger model trained 8k more steps on demos and DAgger data. Same budget, without the Residual RL successes.</span><span class="ko" lang="ko">DAgger 최종 모델을 Demo와 DAgger 데이터로 8k steps 더 학습. Residual RL 성공 Trajectory만 없음</span></dd>
-      </dl>
-
-      <figure class="fig">
-          <button class="zoom" type="button" data-zoom="assets/img/vla_fixes.webp" aria-label="Enlarge figure">
-            <img src="assets/img/vla_fixes.webp" width="2400" height="1014" loading="lazy" alt="Two fixes for grasp failures: takeover DAgger with 1,200 corrective segments, then Residual RL on top of the frozen VLA and distillation of 1,404 successful trajectories.">
-          </button>
-          <figcaption>
-            <span class="en"><b>Fixing grasp failures with data.</b> Takeover DAgger first, then Residual RL on top of the frozen VLA, with the successful trajectories distilled back into the VLA. RL never changes the VLA weights.</span>
-            <span class="ko" lang="ko"><b>Grasp 실패를 데이터로 고친 두 단계.</b> Takeover DAgger 데이터와, Frozen VLA 위 Residual RL의 성공 Trajectory로 VLA를 차례로 재학습. RL은 VLA weight를 바꾸지 않음</span>
-          </figcaption>
-        </figure>
-      <div class="case case-wide">
-          <p class="case-tag"><span class="en">Problem solving</span><span class="ko" lang="ko">문제 해결</span></p>
-          <h3><span class="en">Grasp failures</span><span class="ko" lang="ko">Grasp 실패</span></h3>
-          <dl class="steps">
-            <dt><span class="en">Symptom</span><span class="ko" lang="ko">현상</span></dt>
-            <dd><span class="en">After fine-tuning the VLM planner, task success stayed at 41.0%.</span><span class="ko" lang="ko">VLM planner를 Fine-tuning한 뒤에도 Task success rate가 41.0%에 머묾</span></dd>
-            <dt><span class="en">Analysis</span><span class="ko" lang="ko">분석</span></dt>
-            <dd><span class="en">An oracle planner gave the same 42.9%, and planner decisions were right in 242 of 243 calls. The bottleneck was grasping: cans were knocked over.</span><span class="ko" lang="ko">Oracle planner를 줘도 42.9%로 같고, Planner 결정도 243번 중 242번 정답. 병목은 Grasp(캔 넘어뜨림)</span></dd>
-            <dt><span class="en">Fix</span><span class="ko" lang="ko">조치</span></dt>
-            <dd><span class="en">Takeover DAgger with a scripted teacher, then distillation of Residual RL successes on top of the frozen VLA.</span><span class="ko" lang="ko">Scripted teacher가 넘겨받는 Takeover DAgger, 이어서 Frozen VLA 위 Residual RL의 성공 Trajectory를 VLA에 Distillation</span></dd>
-            <dt><span class="en">Result</span><span class="ko" lang="ko">결과</span></dt>
-            <dd><span class="en">41.0% to 68.6% to 83.4%, above the same-budget controls (45.5%, 71.8%).</span><span class="ko" lang="ko">41.0%에서 68.6%, 83.4%로. 같은 학습량 Control(45.5%, 71.8%)보다 높음</span></dd>
-          </dl>
-      </div>
-    </article>
-
-    <!-- UR 2026 -->
-    <article class="project">
-      <div class="project-head">
-        <p class="kicker small"><span class="en">Co-author</span><span class="ko" lang="ko">공동저자</span> <span class="sep">|</span> UR 2026 Work-in-Progress <span class="sep">|</span> <span class="en">presented July 2026</span><span class="ko" lang="ko">2026.07 발표</span></p>
-        <h3>UR 2026: An Upper-Humanoid Real2Sim2Real System</h3>
-        <p class="en">A team system that goes from real demonstrations to a real-robot policy. I handled three parts of it.</p>
-        <p class="ko" lang="ko">실물 Demonstration에서 실제 로봇 Policy까지 이어지는 팀 시스템에서 세 부분을 맡음</p>
-      </div>
-      <figure class="fig">
-        <button class="zoom" type="button" data-zoom="assets/img/ur2026.webp" aria-label="Enlarge figure">
-          <img src="assets/img/ur2026.webp" width="2400" height="831" loading="lazy" alt="Real2Sim2Real system: Real2Sim with real-time 6D tracking and a digital twin, Sim training with collision shapes in Isaac Lab, Sim2Real on the real robot; my parts are perception, sweeping assets and the sweeping task.">
-        </button>
-      </figure>
-      <div class="parts">
-        <div class="part">
-          <p class="part-num">01</p>
-          <h4>Perception</h4>
-          <p class="en">FoundationPose needs a target region marked on the first frame. I trained a YOLO detector for the target objects so 6D tracking starts from detections, with no one in the loop. The team used it as policy input in real-robot experiments.</p>
-          <p class="ko" lang="ko">FoundationPose는 첫 프레임에 대상 영역을 지정해야 추적 시작. 대상 물체 검출용 YOLO를 직접 학습해 검출 결과로 추적 자동 시작. 팀의 실제 로봇 실험에서 Policy 입력으로 사용</p>
-        </div>
-        <div class="part">
-          <p class="part-num">02</p>
-          <h4><span class="en">Sweeping assets</span><span class="ko" lang="ko">Sweeping asset</span></h4>
-          <p class="en">Broom modeled in CAD and set up as a USD asset, bristles approximated as one rigid body.</p>
-          <p class="ko" lang="ko">빗자루를 CAD로 모델링해 USD asset으로 구성, 솔은 하나의 Rigid body로 근사</p>
-        </div>
-        <div class="part">
-          <p class="part-num">03</p>
-          <h4><span class="en">Sweeping task</span><span class="ko" lang="ko">Sweeping task</span></h4>
-          <p class="en">Bimanual sweeping task with stage-wise rewards and penalties, and policy training.</p>
-          <p class="ko" lang="ko">양팔 쓸기 작업, 단계별 Reward와 Penalty 설계, Policy 학습</p>
-        </div>
-        <div class="part part-team">
-          <p class="part-num"><span class="en">Team result</span><span class="ko" lang="ko">팀 결과</span></p>
-          <p class="team-row"><b>85.7%</b><span>Bimanual Sweeping</span></p>
-          <p class="team-row"><b>82.8%</b><span>Cup Handover</span></p>
-          <p class="note"><span class="en">Real robot</span><span class="ko" lang="ko">Real robot</span></p>
-        </div>
-      </div>
-    </article>
-
-    <!-- SIM ASSETS -->
-    <article class="project">
-      <div class="project-head">
-        <p class="kicker small">Simulation assets <span class="sep">|</span> UR 2026 Sweeping, TMAD</p>
-        <h3><span class="en">Real tools, rebuilt for Isaac Lab</span><span class="ko" lang="ko">실물 도구를 Isaac Lab으로</span></h3>
-        <p class="en">Broom, dustpan and broom supporter (UR 2026 Sweeping) and cans (TMAD), built to match the real objects. Appearance follows photos of the real objects; collision uses separate colliders.</p>
-        <p class="ko" lang="ko">빗자루, 쓰레받기, 서포터(UR 2026 Sweeping)와 캔(TMAD)을 실물에 맞춰 구성. 겉모습은 실물 사진 기준, 충돌은 별도 Collider</p>
-      </div>
-      <figure class="fig">
-        <button class="zoom" type="button" data-zoom="assets/img/sim_assets.webp" aria-label="Enlarge figure">
-          <img src="assets/img/sim_assets.webp" width="2400" height="773" loading="lazy" alt="Real and Isaac Lab sweeping scenes side by side, with broom, dustpan, broom supporter and can compared between real photos and simulation.">
-        </button>
-      </figure>
-      <div class="assets">
-        <div class="asset">
-          <h4>Broom <span class="muted">own CAD</span></h4>
-          <p class="en">Modeled in Fusion (2025.11). Three convex hulls; the bristles are approximated as a rigid body. Bristle-table and bristle-dustpan collisions are excluded.</p>
-          <p class="ko" lang="ko">Fusion으로 직접 CAD 모델링(2025.11). Convex hull 3개, 솔은 Rigid body로 근사. 솔과 책상, 쓰레받기 충돌 제외</p>
-        </div>
-        <div class="asset">
-          <h4>Dustpan <span class="muted">public mesh</span></h4>
-          <p class="en">Public mesh edited in Blender and set up as USD, resized to the lab's dustpan (21 cm wide), with a convex decomposition collider.</p>
-          <p class="ko" lang="ko">공개 Mesh를 Blender에서 편집해 USD로 구성. 실험실 쓰레받기 크기(폭 21 cm)로 다시 맞추고 Convex decomposition Collider 적용</p>
-        </div>
-        <div class="asset">
-          <h4>Broom supporter <span class="muted">own CAD</span></h4>
-          <p class="en">L-shaped stand modeled in Fusion (2025.12). Fixed as a kinematic body to hold the broom upright at the start.</p>
-          <p class="ko" lang="ko">Fusion으로 L자 거치대 모델링(2025.12). Kinematic body로 고정해 빗자루를 세워 두는 시작 자세에 사용</p>
-        </div>
-        <div class="asset">
-          <h4>Can <span class="muted">public mesh + label</span></h4>
-          <p class="en">Real label textures applied to the UV of a public mesh in red and green, scaled per axis to the real can's diameter and height.</p>
-          <p class="ko" lang="ko">공개 Mesh의 UV에 실물 라벨 텍스처를 빨강, 초록 두 벌로 입힘. 실물 캔의 지름과 높이에 맞춰 축별 Scale 조정</p>
-        </div>
-      </div>
-
-      <div class="photog">
-        <div class="photog-text">
-          <h4><span class="en">Photogrammetry 3D reconstruction</span><span class="ko" lang="ko">Photogrammetry 3D 복원</span> <span class="muted"><span class="en">lab project, 2025.09 to 10</span><span class="ko" lang="ko">연구실 과제, 2025.09 ~ 10</span></span></h4>
-          <p class="en">Real objects photographed and reconstructed with Meshroom, cleaned up in MeshLab and Blender, and converted to OBJ and USD for pose estimation and simulation.</p>
-          <p class="ko" lang="ko">자세 추정과 Simulation에 쓸 실물 물체 Mesh가 필요해 직접 촬영 후 Meshroom으로 복원하고, MeshLab과 Blender로 정리해 OBJ와 USD로 변환</p>
-        </div>
-        <figure class="fig fig-flat">
-          <button class="zoom" type="button" data-zoom="assets/img/photogrammetry.webp" aria-label="Enlarge figure">
-            <img src="assets/img/photogrammetry.webp" width="2400" height="366" loading="lazy" alt="Photogrammetry: photo, raw mesh, textured model, Meshroom reconstruction of a sauce bottle from 57 photos, and the tool chain from photos to USD.">
-          </button>
-        </figure>
-      </div>
-    </article>
+    <div class="caps"><div class="cap" data-reveal><p class="label">01</p><h3><span class="en">RL and distillation</span><span class="ko" lang="ko">강화학습과 Distillation</span></h3><ul><li><span class="en">Teacher training with PPO after BC initialization</span><span class="ko" lang="ko">BC 초기화 후 PPO로 Teacher 학습</span></li><li><span class="en">Distillation into a stereo RGB student</span><span class="ko" lang="ko">Stereo RGB Student로 Distillation</span></li><li><span class="en">Domain randomization design</span><span class="ko" lang="ko">Domain randomization 설계</span></li></ul><div class="tools"><span class="chip">PyTorch</span><span class="chip">PPO</span><span class="chip">Isaac Lab</span></div></div><div class="cap" data-reveal><p class="label">02</p><h3><span class="en">VLA</span><span class="ko" lang="ko">VLA</span></h3><ul><li><span class="en">Qwen3-VL-4B QLoRA fine-tuning</span><span class="ko" lang="ko">Qwen3-VL-4B QLoRA Fine-tuning</span></li><li><span class="en">Bimanual 44-D actions with SmolVLA</span><span class="ko" lang="ko">SmolVLA로 양팔 44-D Action 생성</span></li><li><span class="en">DAgger, Residual RL distillation</span><span class="ko" lang="ko">DAgger, Residual RL distillation</span></li></ul><div class="tools"><span class="chip">LeRobot</span><span class="chip">QLoRA</span><span class="chip">PPO</span></div></div><div class="cap" data-reveal><p class="label">03</p><h3><span class="en">Simulation environments</span><span class="ko" lang="ko">Simulation 환경</span></h3><ul><li><span class="en">Bimanual sweeping environment</span><span class="ko" lang="ko">Bimanual Sweeping 환경 구성</span></li><li><span class="en">Collision shapes, stage-wise rewards</span><span class="ko" lang="ko">Collision shape, 단계별 Reward</span></li><li><span class="en">CAD and photogrammetry 3D assets</span><span class="ko" lang="ko">CAD, Photogrammetry 3D asset</span></li></ul><div class="tools"><span class="chip">USD</span><span class="chip">Meshroom</span><span class="chip">CAD</span></div></div><div class="cap" data-reveal><p class="label">04</p><h3><span class="en">Perception</span><span class="ko" lang="ko">Perception</span></h3><ul><li><span class="en">YOLO detector for target objects</span><span class="ko" lang="ko">대상 물체 YOLO detector 학습</span></li><li><span class="en">FoundationPose 6D tracking</span><span class="ko" lang="ko">FoundationPose 6D 추적 도입</span></li><li><span class="en">Tracking that starts from detections</span><span class="ko" lang="ko">검출 결과로 추적 자동 시작</span></li></ul><div class="tools"><span class="chip">YOLO</span><span class="chip">FoundationPose</span></div></div></div>
   </div>
 </section>
-
-<!-- PUBLICATIONS -->
-<section class="section" id="publications">
+<section class="sec" id="background">
   <div class="wrap">
-    <header class="sec-head">
-      <p class="kicker"><span class="num">03</span> Publications</p>
-      <h2><span class="en">Papers and patent</span><span class="ko" lang="ko">논문과 특허</span></h2>
-    </header>
-    <ol class="pubs">
-      <li class="pub pub-main">
-        <div class="pub-venue"><p class="venue">ICCR 2026</p><p class="status status-review"><span class="en">Under review</span><span class="ko" lang="ko">심사 중</span></p></div>
-        <div class="pub-body">
-          <p class="pub-title">TMAD: Temporal Multi-Agent Distillation for Bimanual Long-Horizon Manipulation</p>
-          <p class="pub-authors"><b>Sunghyun Park</b>, Ismael Espinoza, Gabin Kim, Joon Young Kim, Kangsan Lee, Tae-Seong Kim</p>
-          <p class="pub-note"><span class="en">First author. 8th International Conference on Control and Robotics.</span><span class="ko" lang="ko">제1저자. 8th International Conference on Control and Robotics</span></p>
-        </div>
-      </li>
-      <li class="pub">
-        <div class="pub-venue"><p class="venue">UR 2026</p><p class="status"><span class="en">Work-in-Progress</span><span class="ko" lang="ko">Work-in-Progress</span></p></div>
-        <div class="pub-body">
-          <p class="pub-title">An Upper-Humanoid Real2Sim2Real System for Bimanual Long-Horizon Manipulation</p>
-          <p class="pub-authors">Yong-Hyeok Choi, Ismael Espinoza, Kangsan Lee, <b>Sunghyun Park</b>, Joon Young Kim, Ji-Heon Oh, Won Hee Lee, Tae-Seong Kim</p>
-          <p class="pub-note"><span class="en">23rd International Conference on Ubiquitous Robots, Osaka, July 2026.</span><span class="ko" lang="ko">23rd International Conference on Ubiquitous Robots, Osaka, 2026.07</span></p>
-        </div>
-      </li>
-      <li class="pub">
-        <div class="pub-venue"><p class="venue">IEEE ICCE 2026</p></div>
-        <div class="pub-body">
-          <p class="pub-title"><a href="https://doi.org/10.1109/ICCE70609.2026.11658394">Enhancing RT-DETR with Reinforcement Learning for Intracranial Hemorrhage Detection and Classification in Brain CT Images</a></p>
-          <p class="pub-authors">Kangsan Lee, Hafiz Zahid Tufail, <b>Sunghyun Park</b>, Joon-Young Kim, Sana Ullah, Ji-Heon Oh, Dong-Luong Dinh, Won Hee Lee, Tae-Seong Kim</p>
-          <p class="pub-note">IEEE International Conference on Communications and Electronics</p>
-        </div>
-      </li>
-      <li class="pub">
-        <div class="pub-venue"><p class="venue">MIDL 2026</p><p class="status"><span class="en">Short paper</span><span class="ko" lang="ko">Short paper</span></p></div>
-        <div class="pub-body">
-          <p class="pub-title"><a href="https://openreview.net/forum?id=bdCXTRTQ29">3D Segmentation of Intracerebral Hemorrhage in Brain CT Using Enhanced UNet Transformer via Reinforcement Learning</a></p>
-          <p class="pub-authors">Sana Ullah, Gabin Kim, Dongwook Lee, Hafiz Zahid Tufail, Kangsan Lee, <b>Sunghyun Park</b>, Joon-Young Kim, Won Hee Lee, Tae-Seong Kim</p>
-          <p class="pub-note">Medical Imaging with Deep Learning</p>
-        </div>
-      </li>
-    </ol>
-    <p class="note pubs-note"><span class="en">Medical imaging collaborations: early PPO implementation and dataset model training.</span><span class="ko" lang="ko">의료영상 공동연구 2편: PPO 초기 구현과 데이터셋 모델 학습 참여</span></p>
-
-    <div class="extra-pubs">
-      <div class="xpub">
-        <p class="xpub-tag"><span class="en">Patent</span><span class="ko" lang="ko">특허</span></p>
-        <p class="xpub-title en">System and method for learning bimanual robot control policies based on temporal multi-agent distillation</p>
-        <p class="xpub-title ko" lang="ko">시간적 멀티 에이전트 증류에 기반한 양팔 로봇 제어 정책 학습 시스템 및 방법</p>
-        <p class="xpub-meta"><span class="en">Korean patent application, filed September 2026</span><span class="ko" lang="ko">국내 특허 출원, 2026.09</span></p>
-      </div>
-      <div class="xpub">
-        <p class="xpub-tag"><span class="en">M.S. thesis</span><span class="ko" lang="ko">석사 학위논문</span></p>
-        <p class="xpub-title en">Development of Vision-Based Robot Intelligence via Temporal Multi-Agent Distillation for Bimanual Long-Horizon Manipulation</p>
-        <p class="xpub-title ko" lang="ko">양팔 로봇의 Long-Horizon 사물 조작을 위한 시간-맥락 다중 에이전트 정책 증류 기반 시각 지능 개발</p>
-        <p class="xpub-meta"><span class="en">Kyung Hee University, February 2027 (expected)</span><span class="ko" lang="ko">경희대학교, 2027.02 예정</span></p>
-      </div>
+    <header class="sec-head"><p class="label"><span class="num-tag">03</span><span class="sep">/</span>Background</p>
+      <div class="sec-side"><h2><span class="en">Education and experience</span><span class="ko" lang="ko">학력과 경험</span></h2></div></header>
+    <div class="bg-grid">
+      <div><p class="label" style="margin-bottom:14px"><span class="en">Education</span><span class="ko" lang="ko">학력</span></p><div class="tl"><p class="tl-date">2025.03 ~ 2027.02</p><div><h4><span class="en">M.S., Electronics and Information Convergence Engineering</span><span class="ko" lang="ko">전자정보융합공학과 석사과정</span></h4><p><span class="en">Kyung Hee University. Graduating February 2027.</span><span class="ko" lang="ko">경희대학교 대학원, 2027년 2월 졸업 예정</span></p></div></div><div class="tl"><p class="tl-date">2019.03 ~ 2025.02</p><div><h4><span class="en">B.S., Biomedical Engineering</span><span class="ko" lang="ko">생체의공학과 학사</span></h4><p><span class="en">Kyung Hee University</span><span class="ko" lang="ko">경희대학교</span></p></div></div></div>
+      <div><p class="label" style="margin-bottom:14px"><span class="en">Experience</span><span class="ko" lang="ko">경험</span></p><div class="tl"><p class="tl-date">2024.06 ~ 08</p><div><h4><span class="en">Intern, Innovation Development Team, Jeisys Medical</span><span class="ko" lang="ko">현장실습, 제이시스메디칼 혁신개발팀</span></h4><p><span class="en">Temperature measurement experiments on HIFU and RF devices. Automated clinical data processing with Excel VBA.</span><span class="ko" lang="ko">HIFU와 RF 장비 온도 측정 실험. VBA로 임상 데이터 정리 자동화</span></p></div></div><div class="tl"><p class="tl-date">2024.10</p><div><h4><span class="en">Encouragement Award, KHU Creative Design Competition</span><span class="ko" lang="ko">교내 창의적종합설계 경진대회 장려상</span></h4><p><span class="en">AI part of the diet app My GPTrainer, shared by two: about 60k synthetic images of 400 Korean dishes, three YOLO models compared, on-phone recognition with TFLite.</span><span class="ko" lang="ko">음식 사진 식단 관리 앱 My GPTrainer의 AI 파트를 둘이 맡아, 한식 400종 합성 이미지 약 6만 장과 YOLO 3종 비교, TFLite로 휴대전화 인식</span></p></div></div><div class="tl"><p class="tl-date">2024.04 ~ 12</p><div><h4><span class="en">Team lead, ATLAS startup club</span><span class="ko" lang="ko">창업동아리 ATLAS 팀장</span></h4><p><span class="en">Founded the club with members recruited by interview. Split 10 members into two teams; both teams won awards at the campus competition.</span><span class="ko" lang="ko">동아리원을 면접으로 모아 창업동아리를 만들고, 10명을 두 팀으로 나눠 교내 경진대회에서 두 팀 모두 수상</span></p></div></div><div class="tl"><p class="tl-date"><span class="en">Undergraduate</span><span class="ko" lang="ko">학부</span></p><div><h4><span class="en">Graduation research</span><span class="ko" lang="ko">학부 졸업 연구</span></h4><p><span class="en">Device that measures grip force and EMG together. Mechanics, circuit and firmware with ATmega128 and HX711.</span><span class="ko" lang="ko">악력과 근전도(EMG)를 함께 재는 측정 장치. ATmega128, HX711로 기구, 회로, Firmware 제작</span></p></div></div></div>
     </div>
   </div>
 </section>
-
-<!-- ABOUT -->
-<section class="section section-alt" id="about">
+<section class="sec sec-alt" id="publications">
   <div class="wrap">
-    <header class="sec-head">
-      <p class="kicker"><span class="num">04</span> About</p>
-      <h2><span class="en">Education, experience, skills</span><span class="ko" lang="ko">학력, 경험, 기술</span></h2>
-    </header>
-    <div class="about-grid">
-      <div class="timeline">
-        <h3><span class="en">Education</span><span class="ko" lang="ko">학력</span></h3>
-        <div class="tl">
-          <p class="tl-date">2025.03 ~ 2027.02</p>
-          <div>
-            <p class="tl-title"><span class="en">M.S., Electronics and Information Convergence Engineering</span><span class="ko" lang="ko">전자정보융합공학과 석사과정</span></p>
-            <p class="tl-sub"><span class="en">Kyung Hee University. Graduating February 2027. Advisor: Prof. Tae-Seong Kim</span><span class="ko" lang="ko">경희대학교 대학원, 2027년 2월 졸업 예정. 지도교수 김태성</span></p>
-          </div>
-        </div>
-        <div class="tl">
-          <p class="tl-date">2019.03 ~ 2025.02</p>
-          <div>
-            <p class="tl-title"><span class="en">B.S., Biomedical Engineering</span><span class="ko" lang="ko">생체의공학과 학사</span></p>
-            <p class="tl-sub"><span class="en">Kyung Hee University</span><span class="ko" lang="ko">경희대학교</span></p>
-          </div>
-        </div>
-
-        <h3><span class="en">Experience</span><span class="ko" lang="ko">경험</span></h3>
-        <div class="tl">
-          <p class="tl-date">2024.06 ~ 08</p>
-          <div>
-            <p class="tl-title"><span class="en">Intern, Innovation Development Team, Jeisys Medical</span><span class="ko" lang="ko">현장실습, 제이시스메디칼 혁신개발팀</span></p>
-            <p class="tl-sub"><span class="en">Temperature measurement experiments on HIFU and RF devices. Automated clinical data processing with Excel VBA.</span><span class="ko" lang="ko">HIFU와 RF 장비 온도 측정 실험. VBA로 임상 데이터 정리 자동화</span></p>
-          </div>
-        </div>
-        <div class="tl">
-          <p class="tl-date">2024.10</p>
-          <div>
-            <p class="tl-title"><span class="en">Encouragement Award, KHU Creative Design Competition</span><span class="ko" lang="ko">교내 창의적종합설계 경진대회 장려상</span></p>
-            <p class="tl-sub"><span class="en">AI part of the diet app My GPTrainer, shared by two: about 60k synthetic images of 400 Korean dishes, three YOLO models compared, on-phone recognition with TFLite.</span><span class="ko" lang="ko">음식 사진 식단 관리 앱 My GPTrainer의 AI 파트를 둘이 맡아, 한식 400종 합성 이미지 약 6만 장과 YOLO 3종 비교, TFLite로 휴대전화 인식</span></p>
-          </div>
-        </div>
-        <div class="tl">
-          <p class="tl-date">2024.04 ~ 12</p>
-          <div>
-            <p class="tl-title"><span class="en">Team lead, ATLAS startup club</span><span class="ko" lang="ko">창업동아리 ATLAS 팀장</span></p>
-            <p class="tl-sub"><span class="en">Founded the club with members recruited by interview. Split 10 members into two teams; both teams won awards at the campus competition.</span><span class="ko" lang="ko">동아리원을 면접으로 모아 창업동아리를 만들고, 10명을 두 팀으로 나눠 교내 경진대회에서 두 팀 모두 수상</span></p>
-          </div>
-        </div>
-        <div class="tl">
-          <p class="tl-date"><span class="en">Undergraduate</span><span class="ko" lang="ko">학부</span></p>
-          <div>
-            <p class="tl-title"><span class="en">Graduation research</span><span class="ko" lang="ko">학부 졸업 연구</span></p>
-            <p class="tl-sub"><span class="en">Device that measures grip force and EMG together. Mechanics, circuit and firmware with ATmega128 and HX711.</span><span class="ko" lang="ko">악력과 근전도(EMG)를 함께 재는 측정 장치. ATmega128, HX711로 기구, 회로, Firmware 제작</span></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="skills">
-        <h3><span class="en">Skills</span><span class="ko" lang="ko">기술</span></h3>
-        <div class="skill">
-          <p class="skill-name"><span class="en">RL and distillation</span><span class="ko" lang="ko">강화학습과 Distillation</span></p>
-          <ul class="en"><li>Teacher training with PPO after BC initialization</li><li>Distillation into a stereo RGB student</li><li>Domain randomization design</li></ul>
-          <ul class="ko" lang="ko"><li>BC 초기화 후 PPO로 Teacher 학습</li><li>Stereo RGB Student로 Distillation</li><li>Domain randomization 설계</li></ul>
-          <p class="tools">PyTorch <i>|</i> PPO <i>|</i> Isaac Lab</p>
-        </div>
-        <div class="skill">
-          <p class="skill-name">VLA</p>
-          <ul class="en"><li>Qwen3-VL-4B QLoRA fine-tuning</li><li>Bimanual 44-D actions with SmolVLA</li><li>DAgger, Residual RL distillation</li></ul>
-          <ul class="ko" lang="ko"><li>Qwen3-VL-4B QLoRA Fine-tuning</li><li>SmolVLA로 양팔 44-D Action 생성</li><li>DAgger, Residual RL distillation</li></ul>
-          <p class="tools">LeRobot <i>|</i> QLoRA <i>|</i> PPO</p>
-        </div>
-        <div class="skill">
-          <p class="skill-name"><span class="en">Simulation environments</span><span class="ko" lang="ko">Simulation 환경</span></p>
-          <ul class="en"><li>Bimanual sweeping environment</li><li>Collision shapes, stage-wise rewards</li><li>CAD and photogrammetry 3D assets</li></ul>
-          <ul class="ko" lang="ko"><li>Bimanual Sweeping 환경 구성</li><li>Collision shape, 단계별 Reward</li><li>CAD, Photogrammetry 3D asset</li></ul>
-          <p class="tools">USD <i>|</i> Meshroom <i>|</i> CAD</p>
-        </div>
-        <div class="skill">
-          <p class="skill-name">Perception</p>
-          <ul class="en"><li>YOLO detector for target objects</li><li>FoundationPose 6D tracking</li><li>Tracking that starts from detections</li></ul>
-          <ul class="ko" lang="ko"><li>대상 물체 YOLO detector 학습</li><li>FoundationPose 6D 추적 도입</li><li>검출 결과로 추적 자동 시작</li></ul>
-          <p class="tools">YOLO <i>|</i> FoundationPose</p>
-        </div>
-      </div>
+    <header class="sec-head"><p class="label"><span class="num-tag">04</span><span class="sep">/</span>Publications</p>
+      <div class="sec-side"><h2><span class="en">Papers and patent</span><span class="ko" lang="ko">논문과 특허</span></h2></div></header>
+    <div class="pubs"><article class="pub" data-reveal><div class="pub-venue"><b>ICCR 2026</b><span class="chip hl"><span class="en">Under review</span><span class="ko" lang="ko">심사 중</span></span></div><div><p class="pub-title">TMAD: Temporal Multi-Agent Distillation for Bimanual Long-Horizon Manipulation</p><p class="pub-authors"><b>Sunghyun Park</b>, Ismael Espinoza, Gabin Kim, Joon Young Kim, Kangsan Lee, Tae-Seong Kim</p><p class="pub-note"><span class="en">First author. 8th International Conference on Control and Robotics.</span><span class="ko" lang="ko">제1저자. 8th International Conference on Control and Robotics</span></p></div></article><article class="pub" data-reveal><div class="pub-venue"><b>UR 2026</b><span class="chip">Work-in-Progress</span></div><div><p class="pub-title">An Upper-Humanoid Real2Sim2Real System for Bimanual Long-Horizon Manipulation</p><p class="pub-authors">Yong-Hyeok Choi, Ismael Espinoza, Kangsan Lee, <b>Sunghyun Park</b>, Joon Young Kim, Ji-Heon Oh, Won Hee Lee, Tae-Seong Kim</p><p class="pub-note"><span class="en">23rd International Conference on Ubiquitous Robots, Osaka, July 2026.</span><span class="ko" lang="ko">23rd International Conference on Ubiquitous Robots, Osaka, 2026.07</span></p></div></article><article class="pub" data-reveal><div class="pub-venue"><b>IEEE ICCE 2026</b></div><div><p class="pub-title"><a href="https://doi.org/10.1109/ICCE70609.2026.11658394">Enhancing RT-DETR with Reinforcement Learning for Intracranial Hemorrhage Detection and Classification in Brain CT Images ↗</a></p><p class="pub-authors">Kangsan Lee, Hafiz Zahid Tufail, <b>Sunghyun Park</b>, Joon-Young Kim, Sana Ullah, Ji-Heon Oh, Dong-Luong Dinh, Won Hee Lee, Tae-Seong Kim</p><p class="pub-note"><span class="en">IEEE International Conference on Communications and Electronics. Early PPO implementation and dataset model training.</span><span class="ko" lang="ko">IEEE International Conference on Communications and Electronics. PPO 초기 구현과 데이터셋 모델 학습 참여</span></p></div></article><article class="pub" data-reveal><div class="pub-venue"><b>MIDL 2026</b><span class="chip">Short paper</span></div><div><p class="pub-title"><a href="https://openreview.net/forum?id=bdCXTRTQ29">3D Segmentation of Intracerebral Hemorrhage in Brain CT Using Enhanced UNet Transformer via Reinforcement Learning ↗</a></p><p class="pub-authors">Sana Ullah, Gabin Kim, Dongwook Lee, Hafiz Zahid Tufail, Kangsan Lee, <b>Sunghyun Park</b>, Joon-Young Kim, Won Hee Lee, Tae-Seong Kim</p><p class="pub-note"><span class="en">Medical Imaging with Deep Learning. Early PPO implementation and dataset model training.</span><span class="ko" lang="ko">Medical Imaging with Deep Learning. PPO 초기 구현과 데이터셋 모델 학습 참여</span></p></div></article></div>
+    <div class="pub-extra">
+      <div class="xpub"><p class="label"><span class="en">Patent</span><span class="ko" lang="ko">특허</span></p><h4><span class="en">System and method for learning bimanual robot control policies based on temporal multi-agent distillation</span><span class="ko" lang="ko">시간적 멀티 에이전트 증류에 기반한 양팔 로봇 제어 정책 학습 시스템 및 방법</span></h4><p><span class="en">Korean patent application, filed September 2026</span><span class="ko" lang="ko">국내 특허 출원, 2026.09</span></p></div>
+      <div class="xpub"><p class="label"><span class="en">M.S. thesis</span><span class="ko" lang="ko">석사 학위논문</span></p><h4><span class="en">Development of Vision-Based Robot Intelligence via Temporal Multi-Agent Distillation for Bimanual Long-Horizon Manipulation</span><span class="ko" lang="ko">양팔 로봇의 Long-Horizon 사물 조작을 위한 시간-맥락 다중 에이전트 정책 증류 기반 시각 지능 개발</span></h4><p><span class="en">Kyung Hee University, February 2027 (expected)</span><span class="ko" lang="ko">경희대학교, 2027.02 예정</span></p></div>
     </div>
   </div>
-</section>
+</section></main>
 
-</main>
-
-<footer class="footer" id="contact">
-  <div class="wrap footer-in">
-    <div>
-      <p class="footer-name">Sunghyun Park <span lang="ko">박성현</span></p>
-      <p class="footer-text en">Next, I want to carry this path, from Isaac Lab assets through teacher-student distillation to real-robot validation, into research that adds simulation RL to VLA and world models, toward robot intelligence that works reliably in homes and factories.</p>
-      <p class="footer-text ko" lang="ko">Isaac Lab asset부터 Teacher-Student Distillation, 실물 검증까지 이어본 경험을 VLA와 World Model에 시뮬레이션 강화학습을 더하는 연구로 이어, 가정과 공장에서 높은 성공률로 쓰이는 로봇 지능을 만들고 싶습니다.</p>
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="label"><span class="num-tag">05</span><span class="sep">/</span>Contact</p>
+    <a class="contact-mail" href="mailto:parksh000124@gmail.com"><span>parksh000124@gmail.com</span></a>
+    <p class="contact-text"><span class="en">Next, I want to carry this path, from Isaac Lab assets through teacher-student distillation to real-robot validation, into research that adds simulation RL to VLA and world models, toward robot intelligence that works reliably in homes and factories.</span><span class="ko" lang="ko">Isaac Lab asset부터 Teacher-Student Distillation, 실물 검증까지 이어본 경험을 VLA와 World Model에 시뮬레이션 강화학습을 더하는 연구로 이어, 가정과 공장에서 높은 성공률로 쓰이는 로봇 지능을 만들고 싶습니다.</span></p>
+    <div class="contact-cta">
+      <a class="btn btn-light" href="mailto:parksh000124@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m3.5 7 8.5 6.5L20.5 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg> <span class="en">Send an email</span><span class="ko" lang="ko">메일 보내기</span></a>
+      <button class="btn btn-ghost-dark" type="button" data-copy="parksh000124@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg> <span class="en">Copy address</span><span class="ko" lang="ko">주소 복사</span></button>
+      <a class="btn btn-ghost-dark" href="https://github.com/parksh20"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg> GitHub</a>
     </div>
-    <div class="footer-links">
-      <a href="mailto:parksh000124@gmail.com">parksh000124@gmail.com</a>
-      <a href="https://github.com/parksh20">github.com/parksh20</a>
-      <p class="footer-small"><span class="en">Last updated October 2026</span><span class="ko" lang="ko">2026년 10월 갱신</span></p>
+    <div class="foot">
+      <span>© 2026 Sunghyun Park</span>
+      <span><a href="mailto:parksh000124@gmail.com">parksh000124@gmail.com</a> &nbsp;/&nbsp; <a href="https://github.com/parksh20">GitHub</a></span>
+      <span><span class="en">Last updated October 2026</span><span class="ko" lang="ko">2026년 10월 갱신</span></span>
     </div>
   </div>
-</footer>
-
-<div class="lightbox" id="lightbox" hidden>
-  <button type="button" class="lb-close" aria-label="Close">×</button>
-  <img alt="">
-</div>
-
+</section><div class="lightbox" id="lightbox" hidden><button type="button" class="lb-close" aria-label="Close">×</button><img alt=""></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="assets/js/site.js" defer></script>
 </body>
 </html>

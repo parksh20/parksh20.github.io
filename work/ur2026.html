@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UR 2026 Real2Sim2Real | Sunghyun Park</title>
+<meta name="description" content="UR 2026 Work-in-Progress, co-author: YOLO-started FoundationPose tracking, sweeping assets and the bimanual sweeping task.">
+<meta name="author" content="Sunghyun Park">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sunghyun Park">
+<meta property="og:title" content="UR 2026 Real2Sim2Real | Sunghyun Park">
+<meta property="og:description" content="UR 2026 Work-in-Progress, co-author: YOLO-started FoundationPose tracking, sweeping assets and the bimanual sweeping task.">
+<meta property="og:image" content="https://parksh20.github.io/assets/img/og.jpg">
+<meta property="og:url" content="https://parksh20.github.io/work/ur2026.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b0d12">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script>
+(function () {
+  var l = 'en';
+  try {
+    var q = new URLSearchParams(location.search).get('lang'), s = null;
+    try { s = localStorage.getItem('lang'); } catch (e) {}
+    l = q || s || ((navigator.language || '').toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en');
+  } catch (e) {}
+  if (l !== 'ko') l = 'en';
+  document.documentElement.setAttribute('data-lang', l);
+  document.documentElement.lang = l;
+  document.documentElement.classList.add('js-reveal');
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="../index.html"><span class="mark">SP</span><span>Sunghyun Park</span></a>
+    <nav class="nav-links" aria-label="Sections"><a href="../index.html#work"><span class="en">Work</span><span class="ko" lang="ko">작업</span></a><a href="../index.html#about"><span class="en">About</span><span class="ko" lang="ko">소개</span></a><a href="../index.html#publications"><span class="en">Publications</span><span class="ko" lang="ko">논문</span></a><a href="../index.html#contact"><span class="en">Contact</span><span class="ko" lang="ko">연락</span></a></nav>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Language"><button type="button" data-set-lang="en">EN</button><button type="button" data-set-lang="ko">KO</button></div>
+      <a class="nav-cta" href="mailto:parksh000124@gmail.com"><span class="en">Email</span><span class="ko" lang="ko">이메일</span></a>
+    </div>
+  </div>
+</header>
+<main id="main">
+<header class="cs-head"><div class="wrap"><a class="crumb" href="../index.html#work"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true"><path d="M16 10H5M9 5l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> <span class="en">All work</span><span class="ko" lang="ko">전체 작업</span></a><p class="label"><span class="en">Co-author</span><span class="ko" lang="ko">공동저자</span><span class="sep">/</span>UR 2026 Work-in-Progress<span class="sep">/</span><span class="en">Osaka, July 2026</span><span class="ko" lang="ko">Osaka, 2026.07</span></p><h1>Upper-Humanoid Real2Sim2Real<small>An Upper-Humanoid Real2Sim2Real System for Bimanual Long-Horizon Manipulation</small></h1><p class="cs-lede"><span class="en">A team system that goes from real demonstrations to a policy on the real robot: a digital twin with real-time object tracking, demonstration augmentation and policy training in simulation, and direct transfer to hardware. I worked on three parts of it.</span><span class="ko" lang="ko">실물 Demonstration에서 실제 로봇 Policy까지 이어지는 팀 시스템: 실시간 물체 추적을 붙인 Digital twin, Simulation에서 Demo 증강과 Policy 학습, 하드웨어로 바로 전이. 그중 세 부분을 맡음</span></p><div class="cs-meta"><div><p class="label"><span class="en">Role</span><span class="ko" lang="ko">역할</span></p><p><span class="en">Co-author, 4th of 8</span><span class="ko" lang="ko">공동저자(8명 중 4저자)</span></p></div><div><p class="label"><span class="en">My parts</span><span class="ko" lang="ko">담당</span></p><p><span class="en">Perception, sweeping assets, sweeping task</span><span class="ko" lang="ko">Perception, Sweeping asset, Sweeping task</span></p></div><div><p class="label"><span class="en">Robot</span><span class="ko" lang="ko">로봇</span></p><p><span class="en">UR3 × 2, Allegro Hand × 2</span><span class="ko" lang="ko">UR3 × 2, Allegro Hand × 2</span></p></div><div><p class="label"><span class="en">Tools</span><span class="ko" lang="ko">도구</span></p><p><span class="en">YOLO, FoundationPose, RealSense D415, Isaac Lab, USD, Fusion</span><span class="ko" lang="ko">YOLO, FoundationPose, RealSense D415, Isaac Lab, USD, Fusion</span></p></div></div></div></header>
+<div class="cs-hero"><div class="wrap"><div class="figframe"><img src="../assets/img/u_sweep_strip.webp" alt="Bimanual sweeping in simulation (top) and on the real robot (bottom)" width="2400" height="613"></div>
+<p class="cap-text"><span class="en">Bimanual Sweeping in simulation (top) and on the real robot (bottom). Figure from the UR 2026 paper.</span><span class="ko" lang="ko">Bimanual Sweeping, Simulation(위)과 실물(아래). UR 2026 논문 그림</span></p></div></div>
+<div class="wrap"><div class="cs-body"><nav class="toc" aria-label="On this page"><a href="#system"><span class="en">01 System</span><span class="ko" lang="ko">01 시스템</span></a><a href="#parts"><span class="en">02 My parts</span><span class="ko" lang="ko">02 내 담당</span></a><a href="#results"><span class="en">03 Results</span><span class="ko" lang="ko">03 결과</span></a><a href="#debug"><span class="en">04 Problem solving</span><span class="ko" lang="ko">04 문제 해결</span></a><a href="#figures"><span class="en">05 Figures</span><span class="ko" lang="ko">05 그림</span></a></nav><div><section class="cs-sec" id="system"><p class="label">01</p><h2><span class="en">System</span><span class="ko" lang="ko">시스템</span></h2><div class="sys three">
+  <div class="snode"><div class="media r1610"><div class="tags"><span class="tag tag-red">My part 01</span></div><img src="../assets/img/u_twin.webp" alt="Real setup and its digital twin" loading="lazy"></div><div class="snode-body"><p class="label">1 Real2Sim</p><h3><span class="en">Digital twin and object tracking</span><span class="ko" lang="ko">Digital twin과 물체 추적</span></h3><p><span class="en">A kinematic digital twin with real-time 6D object tracking, so simulation matches the physical setup.</span><span class="ko" lang="ko">실시간 6D 물체 추적을 붙인 Kinematic digital twin으로 Simulation을 실제 구성에 맞춤</span></p></div></div>
+  <div class="snode"><div class="media r1610"><div class="tags"><span class="tag tag-red">My part 02, 03</span></div><img src="../assets/img/u_col_scene.webp" alt="Collision shapes in Isaac Lab" loading="lazy"></div><div class="snode-body"><p class="label">2 Sim training</p><h3><span class="en">Demo augmentation and policy training</span><span class="ko" lang="ko">Demo 증강과 Policy 학습</span></h3><p><span class="en">Human seed demonstrations stitched by subtask, then a TC-TRL policy trained with RL.</span><span class="ko" lang="ko">사람 시연을 subtask 단위로 이어 늘리고, TC-TRL Policy를 RL로 학습</span></p></div></div>
+  <div class="snode"><div class="media r1610"><div class="tags"><span class="tag tag-real">Real robot</span></div><img src="../assets/img/u_sweep_real.webp" alt="Sweeping on the real robot" loading="lazy"></div><div class="snode-body"><p class="label">3 Sim2Real</p><h3><span class="en">Policy on the real robot</span><span class="ko" lang="ko">실제 로봇 Policy</span></h3><p><span class="en">The learned policy transferred directly to hardware.</span><span class="ko" lang="ko">학습한 Policy를 하드웨어로 바로 전이</span></p></div></div>
+</div></section><section class="cs-sec" id="parts"><p class="label">02</p><h2><span class="en">My three parts</span><span class="ko" lang="ko">내 담당 세 부분</span></h2><div class="compare">
+  <div class="ccard"><div class="media r1610" style="background:#111"><img src="../assets/img/u_tracking.webp" alt="Real-time 6D tracking with bounding boxes" loading="lazy" style="object-fit:contain"><div class="tags"><span class="tag tag-red">01 Perception</span></div></div><div class="ccard-body"><p class="label">01</p><h3>Perception</h3><p class="prose"><span class="en">FoundationPose needs a target region marked on the first frame before it can track. I trained a YOLO detector for the target objects so 6D tracking starts from its detections, with no one in the loop. The team used this as policy input in the real-robot experiments.</span><span class="ko" lang="ko">FoundationPose는 첫 프레임에 대상 영역을 지정해야 추적을 시작. 대상 물체 검출용 YOLO를 직접 학습해 검출 결과로 추적이 자동 시작되게 함. 팀의 실제 로봇 실험에서 Policy 입력으로 사용</span></p></div></div>
+  <div class="ccard"><div class="media r1610" style="background:#000"><img src="../assets/img/a_col_broom.webp" alt="Broom collider" loading="lazy" style="object-fit:contain"><div class="tags"><span class="tag tag-red">02 Sweeping assets</span></div></div><div class="ccard-body"><p class="label">02</p><h3><span class="en">Sweeping assets</span><span class="ko" lang="ko">Sweeping asset</span></h3><p class="prose"><span class="en">Broom modeled in CAD and set up as a USD asset, with the bristles approximated as one rigid body. Details on the simulation assets page.</span><span class="ko" lang="ko">빗자루를 CAD로 모델링해 USD asset으로 구성, 솔은 하나의 Rigid body로 근사. 자세한 내용은 Simulation asset 페이지</span></p></div></div>
+</div>
+<div class="block ccard" style="display:grid;grid-template-columns:1.4fr 1fr"><div class="media r169"><div class="tags"><span class="tag tag-red">03 Sweeping task</span></div><img src="../assets/img/u_col_render.webp" alt="Sweeping scene in Isaac Lab" loading="lazy"></div><div class="ccard-body"><p class="label">03</p><h3><span class="en">Sweeping task</span><span class="ko" lang="ko">Sweeping task</span></h3><p class="prose"><span class="en">A bimanual sweeping task with stage-wise rewards and penalties, and policy training on it.</span><span class="ko" lang="ko">양팔 쓸기 작업, 단계별 Reward와 Penalty 설계, Policy 학습</span></p></div></div></section><section class="cs-sec" id="results"><p class="label">03</p><h2><span class="en">Results</span><span class="ko" lang="ko">결과</span></h2><div class="charts" style="grid-template-columns:1.2fr 1fr"><div class="chart " role="img" aria-label="Real robot success: Bimanual Sweeping, BC only 20.0, system 85.7. Cup Handover, BC only 37.1, system 82.8."><p class="chart-title"><span class="en">Team result, real robot</span><span class="ko" lang="ko">팀 결과, 실물</span> <span class="label">success rate (%)</span></p><div class="plot"><div class="gl"><i class="" style="bottom:100%"><b>100</b></i><i class="" style="bottom:75%"><b>75</b></i><i class="" style="bottom:50%"><b>50</b></i><i class="" style="bottom:25%"><b>25</b></i><i class="zero" style="bottom:0%"><b>0</b></i></div><div class="cols"><div class="col"><div class="bar b" style="--v:20.0"><b>20.0</b></div><div class="bar s" style="--v:85.7"><b>85.7</b></div></div><div class="col"><div class="bar b" style="--v:37.1"><b>37.1</b></div><div class="bar s" style="--v:82.8"><b>82.8</b></div></div></div></div><div class="xl"><span>Bimanual Sweeping</span><span>Cup Handover</span></div></div>
+<div class="side"><div class="tile"><p class="label">Bimanual Sweeping</p><b>85.7%</b><span><span class="en">vs 20.0% with BC only</span><span class="ko" lang="ko">BC only 20.0%</span></span></div><div class="tile"><p class="label">Cup Handover</p><b>82.8%</b><span><span class="en">vs 37.1% with BC only</span><span class="ko" lang="ko">BC only 37.1%</span></span></div></div></div>
+<ul class="legend"><li><i class="sw b"></i>BC only</li><li><i class="sw s"></i><span class="en">Real2Sim2Real system</span><span class="ko" lang="ko">Real2Sim2Real 시스템</span></li></ul></section><section class="cs-sec" id="debug"><p class="label">04</p><h2><span class="en">Problem solving: starting tracking on its own</span><span class="ko" lang="ko">문제 해결: 추적 자동 시작</span></h2><div class="case"><div class="case-steps"><div><p class="label"><span class="en">Symptom</span><span class="ko" lang="ko">현상</span></p><p><span class="en">FoundationPose starts tracking only after someone marks the target region on the first frame.</span><span class="ko" lang="ko">FoundationPose는 첫 프레임에 대상 영역을 지정해야 추적을 시작</span></p></div><div><p class="label"><span class="en">Analysis</span><span class="ko" lang="ko">분석</span></p><p><span class="en">For the policy to get object poses at every step, tracking had to start without a person.</span><span class="ko" lang="ko">Policy가 매 순간 물체 자세를 받으려면 사람 개입 없이 추적이 시작돼야 함</span></p></div><div><p class="label"><span class="en">Fix</span><span class="ko" lang="ko">조치</span></p><p><span class="en">Trained a YOLO detector for the target objects and started tracking from its detections.</span><span class="ko" lang="ko">대상 물체 검출용 YOLO를 직접 학습해 검출 결과로 추적 시작</span></p></div><div><p class="label"><span class="en">Result</span><span class="ko" lang="ko">결과</span></p><p><span class="en">Tracking starts as soon as the object is in view, and the team used it as policy input on the real robot.</span><span class="ko" lang="ko">물체가 카메라에 잡히면 자동 추적, 팀의 실제 로봇 실험에서 Policy 입력으로 사용</span></p></div></div></div></section><section class="cs-sec" id="figures"><p class="label">05</p><h2><span class="en">Figures</span><span class="ko" lang="ko">그림</span></h2><div class="figs2">
+  <figure><button class="zoom" type="button" data-zoom="../assets/img/ur2026.webp" aria-label="Enlarge figure"><div class="figframe"><img src="../assets/img/ur2026.webp" width="2400" height="831" loading="lazy" alt="Real2Sim2Real system with my parts marked"></div></button><p class="zoom-hint"><span class="en">Click to enlarge</span><span class="ko" lang="ko">눌러서 크게 보기</span></p><p class="cap-text"><span class="en">The system with my three parts marked</span><span class="ko" lang="ko">시스템과 내 담당 세 부분</span></p></figure>
+  <figure><button class="zoom" type="button" data-zoom="../assets/img/u_tasks.webp" aria-label="Enlarge figure"><div class="figframe"><img src="../assets/img/u_tasks.webp" width="2400" height="1174" loading="lazy" alt="UR 2026 tasks in simulation and on the real robot"></div></button><p class="zoom-hint"><span class="en">Click to enlarge</span><span class="ko" lang="ko">눌러서 크게 보기</span></p><p class="cap-text"><span class="en">Cup Handover and Bimanual Sweeping, simulation and real. Figure from the UR 2026 paper.</span><span class="ko" lang="ko">Cup Handover와 Bimanual Sweeping, Simulation과 실물. UR 2026 논문 그림</span></p></figure>
+</div></section></div></div></div>
+</main>
+<a class="next" href="sim-assets.html"><div class="wrap">
+  <p class="label"><span class="en">Next project</span><span class="ko" lang="ko">다음 프로젝트</span></p>
+  <h2><span class="en">Real tools, rebuilt for Isaac Lab</span><span class="ko" lang="ko">실물 도구를 Isaac Lab으로</span> <svg class="arrow" viewBox="0 0 20 20" width="56" height="56" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></h2>
+  <p><span class="en">Broom, dustpan, broom supporter, cans and photogrammetry</span><span class="ko" lang="ko">빗자루, 쓰레받기, 서포터, 캔, Photogrammetry</span></p>
+</div></a><footer class="mini-foot"><div class="wrap"><div class="foot">
+      <span>© 2026 Sunghyun Park</span>
+      <span><a href="mailto:parksh000124@gmail.com">parksh000124@gmail.com</a> &nbsp;/&nbsp; <a href="https://github.com/parksh20">GitHub</a></span>
+      <span><span class="en">Last updated October 2026</span><span class="ko" lang="ko">2026년 10월 갱신</span></span>
+    </div></div></footer>
+<div class="lightbox" id="lightbox" hidden><button type="button" class="lb-close" aria-label="Close">×</button><img alt=""></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>
