@@ -4,6 +4,7 @@
 Run from anywhere:  python _build/build.py
 Every visible string is written twice, English and Korean, through T().
 """
+import hashlib
 import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,6 +27,11 @@ LOOP = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-
 
 
 # ---------------------------------------------------------------- layout
+
+def ver(rel):
+    with open(os.path.join(ROOT, rel), 'rb') as f:
+        return hashlib.sha1(f.read()).hexdigest()[:8]
+
 
 def head(title, desc, p, path):
     return f'''<!doctype html>
@@ -50,7 +56,7 @@ def head(title, desc, p, path):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="{p}assets/css/site.css">
+<link rel="stylesheet" href="{p}assets/css/site.css?v={ver('assets/css/site.css')}">
 <script>
 (function () {{
   var l = 'en';
@@ -62,7 +68,6 @@ def head(title, desc, p, path):
   if (l !== 'ko') l = 'en';
   document.documentElement.setAttribute('data-lang', l);
   document.documentElement.lang = l;
-  document.documentElement.classList.add('js-reveal');
 }})();
 </script>
 </head>
@@ -90,7 +95,7 @@ def nav(p, home=False, dark=False):
 def tail(p):
     return f'''<div class="lightbox" id="lightbox" hidden><button type="button" class="lb-close" aria-label="Close">×</button><img alt=""></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="{p}assets/js/site.js" defer></script>
+<script src="{p}assets/js/site.js?v={ver('assets/js/site.js')}" defer></script>
 </body>
 </html>
 '''
@@ -184,7 +189,7 @@ def toc(items):
 def next_link(href, en, ko, title, sub_en, sub_ko):
     return f'''<a class="next" href="{href}"><div class="wrap">
   <p class="label">{T('Next project', '다음 프로젝트')}</p>
-  <h2>{title} {ARROW.replace('width="16" height="16"', 'width="56" height="56"')}</h2>
+  <h2><span>{title}</span>{ARROW.replace('width="16" height="16"', 'width="56" height="56"')}</h2>
   <p>{T(sub_en, sub_ko)}</p>
 </div></a>'''
 
@@ -213,23 +218,18 @@ def build_home():
     hero = f'''
 <section class="hero" id="top">
   <div class="wrap">
-    <p class="status"><span class="dot"></span>{T('Graduating February 2027, open to full-time roles', '2027년 2월 졸업 예정, 채용 문의 환영')}</p>
-    <div class="hero-name"><h1>Sunghyun Park</h1><span class="ko-name">박성현</span></div>
     <div class="hero-grid">
-      <div>
+      <div class="hero-left">
+        <p class="status"><span class="dot"></span>{T('M.S., Kyung Hee University, graduating Feb 2027', '경희대 석사과정, 2027년 2월 졸업 예정')}</p>
+        <h1 class="hero-h1">Sunghyun Park<span class="ko-name">박성현</span></h1>
         <p class="hero-role">{T('Robot learning for bimanual manipulation', '양팔 로봇 조작을 위한 Robot learning')}</p>
         <p class="hero-desc">{T('Policies trained only in simulation, run on a real two-arm robot with no additional real-robot training.', '시뮬레이션에서만 학습한 양팔 Policy를 실물 추가 학습 없이 실제 로봇에 전이')}</p>
         <div class="hero-cta">
           <a class="btn btn-light" href="#work">{T('View work', '작업 보기')} {ARROW}</a>
           <a class="btn btn-ghost-dark" href="mailto:{EMAIL}">{MAIL} {T('Email', '이메일')}</a>
         </div>
-        <div class="hero-facts">
-          <p><b>{T('Now', '현재')}</b><span>{T('M.S. student, Kyung Hee University', '경희대학교 대학원 석사과정')}</span></p>
-          <p><b>{T('Robot', '로봇')}</b><span>UR3 × 2, Allegro Hand × 2</span></p>
-          <p><b>{T('Tools', '도구')}</b><span>Isaac Lab, PyTorch, PPO, LeRobot</span></p>
-        </div>
       </div>
-      <div class="hero-media">{video(v + 'hero_pnp.mp4', v + 'hero_pnp.jpg', 'Real robot: TMAD student places a red can and a green can into the bin', tags(('Real robot', 'real'), ('Zero-shot', ''), ('2× speed', '')), T('TMAD student, Pick-and-Place', 'TMAD student, Pick-and-Place'), preload='metadata')}</div>
+      <div class="hero-media">{video(v + 'hero_pnp.mp4', v + 'hero_pnp.jpg', 'Real robot: TMAD student places a red can and a green can into the bin', tags(('Real robot', 'real'), ('Zero-shot', ''), ('2× speed', '')), T('TMAD student, Pick-and-Place', 'TMAD student, Pick-and-Place'), preload='auto')}</div>
     </div>
     <div class="hero-stats">
       <div class="hstat"><p class="hstat-num red">72.0<small>%</small></p><p class="hstat-label">{T('Pick-and-Place, real robot', 'Pick-and-Place, 실물')}</p><p class="hstat-sub">Baseline 28.0%</p></div>
@@ -241,7 +241,7 @@ def build_home():
 </section>'''
 
     tmad = f'''
-<a class="wcard wcard-feature" href="work/tmad.html" data-reveal>
+<a class="wcard wcard-feature" href="work/tmad.html">
   <div class="wcard-media">
     <div class="pip-main">{video(v + 'real_handover.mp4', v + 'real_handover.jpg', 'Real robot Handover', tags(('Real robot', 'real'), ('Zero-shot', ''), ('2×', '')), T('Handover, robot camera', 'Handover, 로봇 카메라'))}</div>
     <div class="pip">{video(v + 'sim_handover.mp4', v + 'sim_handover.jpg', 'Simulation Handover', tags(('Simulation', 'sim'),))}</div>
@@ -262,7 +262,7 @@ def build_home():
     frames = [('v_seq_1', 'start', 'green'), ('v_seq_3', 'green placed', 'red'), ('v_seq_4', 'grasp red', ''), ('v_seq_5', 'both placed', 'done')]
     strip = ''.join(f'<figure><span class="call{"" if c else " none"}">{c or "-"}</span><img src="{im}{f}.webp" alt="{lab}" loading="lazy"><figcaption>{lab}</figcaption></figure>' for f, lab, c in frames)
     vla = f'''
-<a class="wcard wcard-col" href="work/vla.html" data-reveal>
+<a class="wcard wcard-col" href="work/vla.html">
   <div class="wcard-media vla-media"><div class="vla-vis">
     <p class="vla-quote"><span class="label">{T('Instruction', '지시문')}</span>"Put the green can on the pad first, then the red can."</p>
     <div class="vla-roles"><p><span class="who navy">VLM planner</span><span class="what">green</span></p><p><span class="who red">SmolVLA</span><span class="what">"put the green can on the pad"</span></p></div>
@@ -278,7 +278,7 @@ def build_home():
 </a>'''
 
     ur = f'''
-<a class="wcard wcard-col" href="work/ur2026.html" data-reveal>
+<a class="wcard wcard-col" href="work/ur2026.html">
   <div class="wcard-media"><img src="{im}u_sweep_4.webp" alt="Bimanual sweeping in simulation and on the real robot" loading="lazy" style="object-position:left center"></div>
   <div class="wcard-body">
     <p class="label"><span class="num-tag">03</span><span class="sep">/</span>{T('Co-author', '공동저자')}<span class="sep">/</span>UR 2026</p>
@@ -290,7 +290,7 @@ def build_home():
 </a>'''
 
     assets = f'''
-<a class="wcard wcard-wide" href="work/sim-assets.html" data-reveal>
+<a class="wcard wcard-wide" href="work/sim-assets.html">
   <div class="wcard-media">
     {image(im + 'a_real_sweep.webp', 'Real sweeping setup', tags(('Real', 'real'),), 'r169')}
     {video(v + 'sim_sweep.mp4', v + 'sim_sweep.jpg', 'Isaac Lab sweeping scene', tags(('Isaac Lab', 'sim'),))}
@@ -332,7 +332,7 @@ def build_home():
     for i, (en, ko, items, tools) in enumerate(caps_data, 1):
         lis = ''.join(f'<li>{T(a, b)}</li>' for a, b in items)
         tl = ''.join(f'<span class="chip">{t}</span>' for t in tools)
-        caps += f'<div class="cap" data-reveal><p class="label">0{i}</p><h3>{T(en, ko)}</h3><ul>{lis}</ul><div class="tools">{tl}</div></div>'
+        caps += f'<div class="cap"><p class="label">0{i}</p><h3>{T(en, ko)}</h3><ul>{lis}</ul><div class="tools">{tl}</div></div>'
 
     about = f'''
 <section class="sec sec-alt" id="about">
@@ -389,7 +389,7 @@ def build_home():
     for venue, status, hl, title, link, authors, note in pubs:
         st = f'<span class="chip{" hl" if hl else ""}">{status}</span>' if status else ''
         tt = f'<a href="{link}">{title} ↗</a>' if link else title
-        rows += f'<article class="pub" data-reveal><div class="pub-venue"><b>{venue}</b>{st}</div><div><p class="pub-title">{tt}</p><p class="pub-authors">{authors}</p><p class="pub-note">{note}</p></div></article>'
+        rows += f'<article class="pub"><div class="pub-venue"><b>{venue}</b>{st}</div><div><p class="pub-title">{tt}</p><p class="pub-authors">{authors}</p><p class="pub-note">{note}</p></div></article>'
 
     publications = f'''
 <section class="sec sec-alt" id="publications">

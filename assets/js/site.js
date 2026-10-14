@@ -55,7 +55,7 @@
     vids.forEach(function (v) { v.autoplay = true; if (v.play) v.play(); });
   }
 
-  // charts grow and blocks fade in when they come into view
+  // charts grow when they come into view
   if (!reduce && hasIO) {
     root.classList.add('js-anim');
     var once = new IntersectionObserver(function (entries) {
@@ -63,9 +63,7 @@
         if (e.isIntersecting) { e.target.classList.add('in'); once.unobserve(e.target); }
       });
     }, { threshold: 0.15 });
-    document.querySelectorAll('.chart, [data-reveal]').forEach(function (el) { once.observe(el); });
-  } else {
-    root.classList.remove('js-reveal');
+    document.querySelectorAll('.chart').forEach(function (el) { once.observe(el); });
   }
 
   // table of contents on case study pages
