@@ -261,7 +261,7 @@ def build_home():
     <p class="label"><span class="num-tag">01</span><span class="sep">/</span>{T('Research, first author', '연구, 제1저자')}<span class="sep">/</span>2026</p>
     <h3>TMAD<small>Temporal Multi-Agent Distillation for Bimanual Long-Horizon Manipulation</small></h3>
     <p class="wdesc">{T('A teacher that reads object states in simulation, distilled into a student that sees two RGB images and joint states. Only the student runs on the real robot.', 'Simulation에서 물체 상태를 받는 Teacher를, 영상 두 장과 관절 값만 보는 Student로 Distillation. 실제 로봇에서는 Student만 실행')}</p>
-    <div class="chips"><span class="chip hl">{T('ICCR 2026, under review', 'ICCR 2026 심사 중')}</span><span class="chip">{T('Patent application filed', '특허 출원')}</span><span class="chip">{T('M.S. thesis', '석사 학위논문')}</span></div>
+    <div class="chips"><span class="chip hl">{T('ICCR 2026, accepted', 'ICCR 2026 채택')}</span><span class="chip">{T('Patent application filed', '특허 출원')}</span><span class="chip">{T('M.S. thesis', '석사 학위논문')}</span></div>
     <div class="wmetrics">
       <div class="wmetric"><b>72.0%</b><span>{T('Pick-and-Place, real robot', 'Pick-and-Place, 실물')}</span><span class="mono">Baseline 28.0%</span></div>
       <div class="wmetric"><b>84.0%</b><span>{T('Handover, real robot', 'Handover, 실물')}</span><span class="mono">Baseline 24.0%</span></div>
@@ -384,7 +384,7 @@ def build_home():
 </section>'''
 
     pubs = [
-        ('ICCR 2026', T('Under review', '심사 중'), True, 'TMAD: Temporal Multi-Agent Distillation for Bimanual Long-Horizon Manipulation', None,
+        ('ICCR 2026', T('Accepted, to be presented Dec. 2026', '채택, 2026년 12월 발표 예정'), True, 'TMAD: Temporal Multi-Agent Distillation for Bimanual Long-Horizon Manipulation', None,
          '<b>Sunghyun Park</b>, Ismael Espinoza, Gabin Kim, Joon Young Kim, Kangsan Lee, Tae-Seong Kim',
          T('First author. 8th International Conference on Control and Robotics.', '제1저자. 8th International Conference on Control and Robotics')),
         ('UR 2026', 'Work-in-Progress', False, 'An Upper-Humanoid Real2Sim2Real System for Bimanual Long-Horizon Manipulation', None,
@@ -449,7 +449,7 @@ def build_tmad():
           'Teacher policy는 Simulation에서 Simulator가 주는 물체 상태로 양팔 Long-horizon 작업을 학습. TMAD는 이를 영상 두 장과 관절 값만 보는 Student로 Distillation하고, 실제 로봇에서는 실물 추가 학습 없이 Student만 실행'))
     header += meta_grid([
         (('Role', '역할'), ('First author: teacher training, student design, distillation, Pick-and-Place experiments, manuscript', '제1저자: Teacher 학습, Student 설계, Distillation 구현, Pick-and-Place 비교 실험, 원고')),
-        (('Status', '상태'), ('ICCR 2026, under review. Patent application filed. M.S. thesis.', 'ICCR 2026 심사 중, 특허 출원, 석사 학위논문')),
+        (('Status', '상태'), ('ICCR 2026, accepted. Patent application filed. M.S. thesis.', 'ICCR 2026 채택, 특허 출원, 석사 학위논문')),
         (('Robot', '로봇'), ('UR3 × 2, Allegro Hand × 2, two RealSense D415 (RGB only)', 'UR3 × 2, Allegro Hand × 2, RealSense D415 두 대(RGB만 사용)')),
         (('Stack', '도구'), ('Isaac Lab, PyTorch, PPO, online distillation, ResNet-18, Transformer', 'Isaac Lab, PyTorch, PPO, Online distillation, ResNet-18, Transformer')),
     ])
